@@ -1,0 +1,63 @@
+name: 每月重新訓練模型
+
+on:
+  schedule:
+    # 每月 1 日 UTC 18:30（＝台灣時間 2 日 02:30）重訓，避開整點監控排程
+    - cron: "30 18 1 * *"
+  workflow_dispatch:
+    inputs:
+      holdout_days:
+        description: "回測保留期天數"
+        required: false
+        default: "45"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: air-quality-monitor    # 與每小時工作流程共用，避免同時寫檔
+  cancel-in-progress: false
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      TZ: Asia/Taipei
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: 安裝套件
+        run: pip install -r requirements.txt
+
+      - name: 重新訓練（含演算法比較與交叉驗證）
+        run: python -m pipeline.train
+
+      - name: 歷史回測
+        run: python -m pipeline.backtest --holdout-days "${{ inputs.holdout_days || '45' }}"
+
+      - name: 更新儀表板
+        run: python -m pipeline.dashboard
+
+      - name: 提交模型
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add models docs
+          if git diff --staged --quiet; then
+            echo "模型無變更"
+            exit 0
+          fi
+          git commit -m "chore: 每月重新訓練模型 $(date '+%Y-%m-%d') [skip ci]"
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push && exit 0
+            echo "推送失敗，第 $i 次重試"
+            sleep 5
+          done
+          exit 1

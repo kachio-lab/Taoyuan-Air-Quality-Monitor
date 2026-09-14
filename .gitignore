@@ -1,0 +1,17 @@
+.env
+__pycache__/
+*.pyc
+.DS_Store
+.ipynb_checkpoints/
+
+# 原始歷史資料（人工下載的 CSV，體積大且可重新取得，不進版控）
+data/raw_historical/
+
+# 課堂教材版（src/）的產出，不進版控
+data/realtime_raw/*.json
+data/processed/*.csv
+data/processed/station_weather_mapping.json
+
+# 注意：data/monitor/、models/、docs/ 是「刻意」要進版控的——
+# GitHub Actions 每小時把觀測與預測寫回 repo，靠 git 當資料庫，
+# 儀表板也是從 docs/ 由 GitHub Pages 直接發佈。

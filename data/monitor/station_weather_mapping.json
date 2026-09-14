@@ -1,0 +1,22 @@
+{
+  "桃園": {
+    "cwa_station": "桃園",
+    "distance_km": 1.85
+  },
+  "大園": {
+    "cwa_station": "觀音",
+    "distance_km": 6.23
+  },
+  "觀音": {
+    "cwa_station": "新興坑尾",
+    "distance_km": 3.58
+  },
+  "平鎮": {
+    "cwa_station": "國一高架N063K",
+    "distance_km": 0.82
+  },
+  "龍潭": {
+    "cwa_station": "龍潭",
+    "distance_km": 0.84
+  }
+}

@@ -1,0 +1,58 @@
+name: 每小時空品監控
+
+on:
+  schedule:
+    # GitHub Actions 的 cron 一律走 UTC。台灣是 UTC+8（無日光節約），
+    # 分鐘數與台灣時間相同：每小時 20 分執行（環境部約在整點後 10~15 分上架前一小時資料）。
+    - cron: "20 * * * *"
+  workflow_dispatch:        # 也可以在 Actions 頁面手動按一次
+
+permissions:
+  contents: write           # 需要寫回觀測、預測與儀表板
+
+concurrency:
+  group: air-quality-monitor
+  cancel-in-progress: false  # 排隊執行，不要中斷正在寫檔的那一次
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      TZ: Asia/Taipei
+      MOENV_API_KEY: ${{ secrets.MOENV_API_KEY }}
+      CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
+      LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+      LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: 安裝套件
+        run: pip install -r requirements.txt
+
+      - name: 抓取 → 預測 → 評分 → 產生儀表板
+        run: python run_hourly.py
+
+      - name: 提交結果
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/monitor docs
+          if git diff --staged --quiet; then
+            echo "沒有變更，略過提交"
+            exit 0
+          fi
+          git commit -m "chore: 每小時監控更新 $(date '+%Y-%m-%d %H:%M %Z') [skip ci]"
+          # 對付與重訓工作流程同時推送的競態：重抓遠端後 rebase 再推
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push && exit 0
+            echo "推送失敗，第 $i 次重試"
+            sleep 5
+          done
+          exit 1

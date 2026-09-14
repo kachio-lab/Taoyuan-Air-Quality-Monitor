@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>空品監控部署手冊</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#1B2422; --paper:#F2F4EE; --surface:#FFFFFF; --surface-2:#EAEDE4;
+    --line:#D9DECF; --muted:#5B6B60; --accent:#1F7A6C; --accent-ink:#0E3F36;
+    --accent-2:#B8631E; --accent-2-ink:#7A3F10;
+    --good:#1F7A6C; --bad:#B8431E;
+    --code-bg:#101815; --code-ink:#D9F0E6; --code-muted:#7FA396; --code-accent:#7FD9BE;
+    --shadow: 0 1px 2px rgba(20,30,25,.04), 0 8px 24px -12px rgba(20,30,25,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#E7EEE8; --paper:#101513; --surface:#171E1B; --surface-2:#1D2521;
+      --line:#2B342E; --muted:#93A399; --accent:#4FBFA6; --accent-ink:#CFF3E8;
+      --accent-2:#E0954A; --accent-2-ink:#FBDDBB;
+      --good:#4FBFA6; --bad:#E0784A;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#E7EEE8; --paper:#101513; --surface:#171E1B; --surface-2:#1D2521;
+    --line:#2B342E; --muted:#93A399; --accent:#4FBFA6; --accent-ink:#CFF3E8;
+    --accent-2:#E0954A; --accent-2-ink:#FBDDBB;
+    --good:#4FBFA6; --bad:#E0784A;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Source Serif 4",Georgia,"Noto Serif TC",serif;
+    font-size:17px; line-height:1.75; -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent); color:var(--paper); }
+
+  h1,h2,h3,.eyebrow,nav,.chip,button{ font-family:"Archivo","Noto Sans TC",sans-serif; }
+  code,pre,.mono,.kbd,table.data{ font-family:"JetBrains Mono","Noto Sans Mono TC",monospace; }
+
+  a{ color:var(--accent-ink); text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset:3px; }
+  a:hover{ text-decoration-color: var(--accent-ink); }
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline:2px solid var(--accent); outline-offset:2px; border-radius:4px;
+  }
+
+  h1{ text-wrap:balance; }
+  h2{ text-wrap:balance; }
+
+  /* ---------- shell layout ---------- */
+  .shell{ max-width:1180px; margin:0 auto; padding:0 24px; }
+  .layout{ display:grid; grid-template-columns: 248px minmax(0,1fr); gap:56px; align-items:start; }
+  @media (max-width: 880px){ .layout{ grid-template-columns: 1fr; gap:0; } }
+
+  /* ---------- header ---------- */
+  header.hero{
+    border-bottom:1px solid var(--line);
+    padding:44px 0 36px;
+  }
+  .eyebrow{
+    font-size:12.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent-ink); display:flex; align-items:center; gap:9px; margin:0 0 14px;
+  }
+  .eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); flex:none; }
+  h1.title{
+    font-size:clamp(30px,4.4vw,44px); font-weight:800; letter-spacing:-.01em;
+    margin:0 0 14px; line-height:1.12;
+  }
+  .lede{
+    font-size:18px; color:var(--muted); max-width:640px; margin:0 0 26px; line-height:1.65;
+  }
+  .quickfacts{ display:flex; flex-wrap:wrap; gap:10px 28px; margin-top:8px; }
+  .quickfacts div{ font-size:13px; color:var(--muted); }
+  .quickfacts b{ display:block; font-family:"JetBrains Mono",monospace; font-size:15px; color:var(--ink); font-weight:500; }
+
+  /* ---------- sidebar / TOC ---------- */
+  aside.toc{ position:sticky; top:28px; padding-top:44px; }
+  @media (max-width: 880px){
+    aside.toc{ position:static; padding-top:0; border-bottom:1px solid var(--line); margin-bottom:8px; }
+  }
+  .toc-label{ font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); margin:0 0 12px; }
+  .toc-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px; }
+  @media (max-width:880px){
+    .toc-list{ flex-direction:row; overflow-x:auto; gap:8px; padding:14px 0 16px;
+      -ms-overflow-style:none; scrollbar-width:none; }
+    .toc-list::-webkit-scrollbar{ display:none; }
+    .toc-list li{ flex:none; }
+  }
+  .toc-list a{
+    display:flex; gap:10px; align-items:baseline; padding:7px 10px; margin:0 -10px;
+    border-radius:8px; font-size:14px; font-weight:500; color:var(--muted);
+    text-decoration:none; white-space:nowrap; transition:background .15s, color .15s;
+  }
+  @media (max-width:880px){
+    .toc-list a{ margin:0; border:1px solid var(--line); border-radius:999px; padding:7px 14px; }
+  }
+  .toc-list a .n{ font-family:"JetBrains Mono",monospace; font-size:11.5px; color:var(--muted); font-weight:500; }
+  .toc-list a:hover{ background:var(--surface-2); color:var(--ink); }
+  .toc-list a.active{ background:color-mix(in srgb, var(--accent) 14%, transparent); color:var(--accent-ink); font-weight:600; }
+  .toc-list a.active .n{ color:var(--accent-ink); }
+
+  /* ---------- main content ---------- */
+  main{ padding:44px 0 100px; min-width:0; }
+  section.chapter{ padding-top:8px; margin-bottom:64px; scroll-margin-top:24px; max-width:700px; }
+  section.chapter:first-of-type{ padding-top:0; }
+  .chapter-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:6px; }
+  .chapter-num{ font-family:"JetBrains Mono",monospace; font-size:14px; color:var(--accent-ink);
+    font-weight:500; letter-spacing:.02em; }
+  h2{ font-size:26px; font-weight:700; margin:0; letter-spacing:-.005em; }
+  .chapter-dek{ color:var(--muted); font-size:15.5px; margin:10px 0 26px; max-width:60ch; }
+
+  h3{ font-size:18px; font-weight:600; margin:32px 0 10px; }
+  p{ margin:0 0 18px; max-width:66ch; }
+  ul,ol{ margin:0 0 18px; padding-left:1.3em; max-width:64ch; }
+  li{ margin-bottom:7px; }
+  strong{ font-weight:600; }
+  .accent-word{ color:var(--accent-ink); font-weight:600; }
+
+  /* ---------- diagram card ---------- */
+  .diagram-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:22px 22px 14px; margin:18px 0 30px; box-shadow:var(--shadow); overflow-x:auto;
+  }
+  .diagram-card .cap{ font-size:12.5px; color:var(--muted); margin-top:10px; padding-top:10px;
+    border-top:1px dashed var(--line); }
+
+  /* ---------- code blocks ---------- */
+  .code-block{ position:relative; margin:18px 0 24px; border-radius:12px; overflow:hidden;
+    background:var(--code-bg); box-shadow:var(--shadow); }
+  .code-block .bar{ display:flex; align-items:center; justify-content:space-between;
+    padding:9px 14px; background:rgba(255,255,255,.03); border-bottom:1px solid rgba(255,255,255,.06); }
+  .code-block .bar span{ font-family:"JetBrains Mono",monospace; font-size:11.5px; color:var(--code-muted);
+    letter-spacing:.04em; }
+  .code-block pre{ margin:0; padding:16px 18px 18px; overflow-x:auto; }
+  .code-block code{ color:var(--code-ink); font-size:13.5px; line-height:1.7; white-space:pre; }
+  .code-block .comment{ color:var(--code-muted); }
+  .code-block .kw{ color:var(--code-accent); }
+  .copy-btn{
+    font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--code-muted);
+    background:transparent; border:1px solid rgba(255,255,255,.14); border-radius:6px;
+    padding:4px 9px; cursor:pointer; transition:color .15s, border-color .15s;
+  }
+  .copy-btn:hover{ color:var(--code-ink); border-color:rgba(255,255,255,.3); }
+
+  code.inline{ background:var(--surface-2); border:1px solid var(--line); border-radius:5px;
+    padding:1.5px 6px; font-size:.86em; color:var(--accent-ink); white-space:nowrap; }
+
+  /* ---------- tables ---------- */
+  .table-wrap{ overflow-x:auto; margin:18px 0 26px; border:1px solid var(--line); border-radius:12px;
+    box-shadow:var(--shadow); }
+  table.data{ width:100%; border-collapse:collapse; background:var(--surface); font-size:13.5px; min-width:480px; }
+  table.data th, table.data td{ padding:10px 14px; text-align:left; border-bottom:1px solid var(--line); }
+  table.data thead th{ background:var(--surface-2); font-weight:600; font-size:12px; text-transform:uppercase;
+    letter-spacing:.06em; color:var(--muted); }
+  table.data tbody tr:last-child td{ border-bottom:none; }
+  table.data td.num, table.data th.num{ text-align:right; font-variant-numeric:tabular-nums; }
+  table.data td.good{ color:var(--good); font-weight:600; }
+  table.data td.bad{ color:var(--bad); font-weight:600; }
+
+  /* ---------- callouts ---------- */
+  .callout{ display:flex; gap:14px; padding:16px 18px; border-radius:12px; margin:20px 0 26px;
+    border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow); }
+  .callout .icon{ flex:none; width:26px; height:26px; border-radius:50%; display:flex; align-items:center;
+    justify-content:center; font-size:14px; font-weight:800; font-family:"Archivo",sans-serif; }
+  .callout p{ margin:0; font-size:15px; max-width:56ch; }
+  .callout p + p{ margin-top:8px; }
+  .callout.note{ border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+  .callout.note .icon{ background:color-mix(in srgb, var(--accent) 18%, transparent); color:var(--accent-ink); }
+  .callout.warn{ border-color: color-mix(in srgb, var(--accent-2) 40%, var(--line)); }
+  .callout.warn .icon{ background:color-mix(in srgb, var(--accent-2) 20%, transparent); color:var(--accent-2-ink); }
+
+  /* ---------- step list (deployment) ---------- */
+  .steps{ list-style:none; margin:22px 0; padding:0; display:flex; flex-direction:column; gap:0; }
+  .step{ display:grid; grid-template-columns:40px 1fr; gap:16px; padding:22px 0;
+    border-top:1px solid var(--line); }
+  .steps .step:first-child{ border-top:none; padding-top:6px; }
+  .step .num{ font-family:"JetBrains Mono",monospace; font-weight:600; font-size:15px; color:var(--accent-ink);
+    padding-top:2px; }
+  .step h4{ margin:0 0 8px; font-family:"Archivo",sans-serif; font-size:16.5px; font-weight:700; }
+  .step p{ margin:0 0 10px; font-size:15px; }
+
+  .kbd{ background:var(--surface-2); border:1px solid var(--line); border-bottom-width:2px; border-radius:5px;
+    padding:1px 7px; font-size:.82em; }
+
+  footer.page-end{ border-top:1px solid var(--line); padding:30px 0 60px; }
+  footer.page-end .shell{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; }
+  footer.page-end p{ margin:0; font-size:13px; color:var(--muted); max-width:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    .toc-list a, .copy-btn, a{ transition:none !important; }
+    html{ scroll-behavior:auto !important; }
+  }
+  html{ scroll-behavior:smooth; }
+
+  /* mermaid container sizing */
+  pre.mermaid{ margin:0; display:flex; justify-content:center; min-width:560px; }
+</style>
+</head>
+<body>
+
+
+<header class="hero">
+  <div class="shell">
+    <p class="eyebrow"><span class="dot"></span>桃園市空品即時預測模型 · 自動化教學</p>
+    <h1 class="title">空品監控部署手冊</h1>
+    <p class="lede">
+      這份教學把 <code class="inline">pipeline/</code> 底下的程式拆開講一遍：資料怎麼來、
+      特徵怎麼算、模型怎麼選、每小時怎麼自動跑、以及怎麼把整條管線掛上
+      GitHub Actions，讓它自己抓資料、自己預測、自己算成效給你看。
+    </p>
+    <div class="quickfacts">
+      <div>監控對象<b>桃園測站 · PM2.5</b></div>
+      <div>預測時距<b>+1h ／ +3h</b></div>
+      <div>更新頻率<b>每小時（cron 20 * * * *）</b></div>
+      <div>重訓頻率<b>每月一次</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell layout">
+  <aside class="toc">
+    <p class="toc-label">目錄</p>
+    <ul class="toc-list" id="toc">
+      <li><a href="#overview"><span class="n">01</span>架構總覽</a></li>
+      <li><a href="#data"><span class="n">02</span>資料從哪裡來</a></li>
+      <li><a href="#features"><span class="n">03</span>特徵工程</a></li>
+      <li><a href="#train"><span class="n">04</span>訓練與回測</a></li>
+      <li><a href="#hourly"><span class="n">05</span>每小時自動化流程</a></li>
+      <li><a href="#deploy"><span class="n">06</span>上架到 GitHub</a></li>
+      <li><a href="#dashboard"><span class="n">07</span>儀表板怎麼看</a></li>
+      <li><a href="#faq"><span class="n">08</span>常見問題與限制</a></li>
+    </ul>
+  </aside>
+
+  <main>
+
+    <section class="chapter" id="overview">
+      <div class="chapter-head"><span class="chapter-num">01</span><h2>架構總覽</h2></div>
+      <p class="chapter-dek">整條管線其實是兩個各自獨立、循環週期不同的自動化流程。</p>
+
+      <p>
+        <strong class="accent-word">每小時流程</strong>負責「線上」的部分：抓最新一小時的觀測值、
+        用已經訓練好的模型做預測、等實際值進來後自動評分、更新儀表板。
+      </p>
+      <div class="diagram-card">
+        <pre class="mermaid">
+flowchart LR
+    MOENV["環境部\naqx_p_432"] --> FETCH["fetch.py"]
+    CWA["中央氣象署\nO-A0001-001"] --> FETCH
+    FETCH --> OBS[("observations.csv")]
+    MODELS[("models/*.joblib")] --> PRED["predict.py"]
+    OBS --> PRED
+    PRED --> PREDCSV[("predictions.csv")]
+    OBS --> EVAL["evaluate.py"]
+    PREDCSV --> EVAL
+    EVAL --> SCORES[("scores.csv\nmetrics.json")]
+    SCORES --> DASH["dashboard.py"]
+    DASH --> PAGE["docs/index.html"]
+    SCORES -.-> NOTIFY["notify.py（選用）"]
+        </pre>
+        <p class="cap">每小時流程（<code class="inline">run_hourly.py</code>，由 hourly-monitor.yml 觸發）</p>
+      </div>
+
+      <p>
+        <strong class="accent-word">每月流程</strong>負責「離線」的部分：用累積下來的觀測資料重新訓練模型、
+        跑一次歷史回測，確認新模型沒有變差。
+      </p>
+      <div class="diagram-card">
+        <pre class="mermaid">
+flowchart LR
+    HIST[("history.csv\n2025+2026 歷史資料")] --> TRAIN["train.py"]
+    OBS2[("observations.csv\n累積的即時觀測")] --> TRAIN
+    TRAIN --> MODEL2[("models/pm25_桃園_h1.joblib\nmodels/pm25_桃園_h3.joblib")]
+    MODEL2 --> BT["backtest.py"]
+    BT --> BTJSON[("docs/backtest.json")]
+        </pre>
+        <p class="cap">每月流程（monthly-retrain.yml 觸發，預設每月 1 日）</p>
+      </div>
+
+      <p>兩條流程共用同一份 <code class="inline">pipeline/settings.py</code> 與
+      <code class="inline">pipeline/features.py</code>，所以訓練時用什麼特徵、線上預測時就用什麼特徵，
+      不會出現「訓練和上線兜不起來」的落差。</p>
+
+      <h3>檔案地圖</h3>
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th>檔案</th><th>角色</th></tr></thead>
+          <tbody>
+            <tr><td><code class="inline">pipeline/settings.py</code></td><td>測站、API、路徑、警示門檻、AQI 分級表</td></tr>
+            <tr><td><code class="inline">pipeline/build_history.py</code></td><td>整併歷史 CSV → history.csv（只需跑一次）</td></tr>
+            <tr><td><code class="inline">pipeline/features.py</code></td><td>特徵工程，訓練與推論共用同一份程式碼</td></tr>
+            <tr><td><code class="inline">pipeline/train.py</code></td><td>比較演算法、交叉驗證、存模型</td></tr>
+            <tr><td><code class="inline">pipeline/backtest.py</code></td><td>保留期回測，給上線前的成效基準</td></tr>
+            <tr><td><code class="inline">pipeline/fetch.py</code></td><td>抓即時觀測（AQI ＋ 氣象）</td></tr>
+            <tr><td><code class="inline">pipeline/predict.py</code></td><td>用最新觀測產生 +1h／+3h 預測</td></tr>
+            <tr><td><code class="inline">pipeline/evaluate.py</code></td><td>預測對上實際值，算成效</td></tr>
+            <tr><td><code class="inline">pipeline/dashboard.py</code></td><td>產生 docs/index.html</td></tr>
+            <tr><td><code class="inline">run_hourly.py</code></td><td>每小時排程的進入點</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="chapter" id="data">
+      <div class="chapter-head"><span class="chapter-num">02</span><h2>資料從哪裡來</h2></div>
+      <p class="chapter-dek">兩種格式、三種來源，最後全部收斂成同一張長表。</p>
+
+      <p>
+        <code class="inline">build_history.py</code> 只需要執行<strong>一次</strong>，
+        它會掃描專案根目錄底下幾個地方，把找到的歷史資料整併成
+        <code class="inline">data/monitor/history.csv</code>：
+      </p>
+      <ul>
+        <li><strong>環境部原始寬表</strong>——像 <code class="inline">北部空品區_2025 (1)/桃園_2025.csv</code>
+          這種「一列一個測項、00~23 橫向排列」的格式，會先 <code class="inline">melt</code> 成長表再
+          <code class="inline">pivot</code> 回「一列一個時間戳記」。</li>
+        <li><strong>課堂整理過的長表</strong>——像 <code class="inline">2026_01_07桃園五站空品監測資料_精簡20欄合體版.csv</code>，
+          欄位已經是一列一筆觀測，直接讀取、對齊欄名即可。</li>
+        <li><strong>環境部即時 API</strong>——上線後由 <code class="inline">fetch.py</code> 每小時累加寫入
+          <code class="inline">observations.csv</code>，訓練時會和 history.csv 合併使用。</li>
+      </ul>
+
+      <p>同測站同一整點如果被抓到兩次（例如寬表和長表都有），會保留<strong>非空欄位比較多</strong>的那一筆，
+      避免用一筆到處都是缺值的紀錄蓋掉一筆完整的紀錄。</p>
+
+      <div class="code-block">
+        <div class="bar"><span>terminal</span><button class="copy-btn" data-copy="python -m pipeline.build_history">複製</button></div>
+        <pre><code><span class="comment"># 只需要執行一次，之後由 fetch.py 每小時累積新資料</span>
+python -m pipeline.build_history</code></pre>
+      </div>
+
+      <p>輸出的標準欄位（<code class="inline">SCHEMA_COLUMNS</code>）固定是：</p>
+      <div class="code-block">
+        <div class="bar"><span>pipeline/settings.py</span><button class="copy-btn" data-copy="sitename, publishtime, pm2.5, pm10, o3, co, so2, no, no2, nox, wind_speed, wind_direc, amb_temp, rh">複製</button></div>
+        <pre><code>sitename, publishtime,
+pm2.5, pm10, o3, co, so2, no, no2, nox,
+wind_speed, wind_direc, amb_temp, rh</code></pre>
+      </div>
+      <p>其中 <code class="inline">amb_temp</code>（氣溫）與 <code class="inline">rh</code>（濕度）不在環境部即時 API
+      裡，是 <code class="inline">fetch.py</code> 另外呼叫中央氣象署 API、依經緯度配對最近的有效氣象站補上的。
+      這一步失敗只會警告、不會中斷整條流程——氣象是輔助欄位，AQI 資料才是主角。</p>
+    </section>
+
+    <section class="chapter" id="features">
+      <div class="chapter-head"><span class="chapter-num">03</span><h2>特徵工程</h2></div>
+      <p class="chapter-dek">同一份 <code class="inline">features.py</code>，訓練和上線推論都呼叫它——不會有兩套邏輯兜不起來的風險。</p>
+
+      <p>做特徵之前，<code class="inline">to_hourly_grid()</code> 會先把時間軸補成<strong>連續的整點格點</strong>。
+      這一步很關鍵：如果不補齊，某個測站缺了兩小時的資料時，<code class="inline">shift(1)</code>
+      拿到的就不是「一小時前」而是「更早以前最後一筆有資料的時刻」，滯後特徵的物理意義會整個跑掉。</p>
+
+      <h3>衍生出的科學指標</h3>
+      <p>公式沿用課堂 EDA notebook 的既有定義：</p>
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th>欄位</th><th>公式</th><th>用途</th></tr></thead>
+          <tbody>
+            <tr><td><code class="inline">ox</code></td><td>o3 + no2</td><td>總氧化劑，光化學反應強度</td></tr>
+            <tr><td><code class="inline">pm_ratio</code></td><td>pm2.5 / pm10</td><td>細懸浮微粒佔比，判斷污染來源</td></tr>
+            <tr><td><code class="inline">co_nox_ratio</code></td><td>co / nox</td><td>交通排放特徵比值</td></tr>
+            <tr><td><code class="inline">sat_vapor_press</code></td><td>Magnus 公式（氣溫）</td><td>飽和水蒸氣壓</td></tr>
+            <tr><td><code class="inline">wind_x</code> / <code class="inline">wind_y</code></td><td>風速 × cos／sin(風向)</td><td>把風向拆成向量，0° 和 359° 不再是天差地遠</td></tr>
+            <tr><td><code class="inline">hour_sin</code> / <code class="inline">hour_cos</code></td><td>週期編碼</td><td>讓模型知道 23 點和 0 點是相鄰的</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>滯後與滾動特徵</h3>
+      <p>這才是預測準度的主力：<code class="inline">pm2.5</code> 和 <code class="inline">ox</code>
+      各取 <code class="inline">1, 2, 3, 6, 12, 24</code> 小時前的值，再加上 3 小時 / 24 小時的滾動平均與標準差，
+      以及 1 小時 / 3 小時的差分。</p>
+
+      <div class="callout note">
+        <div class="icon">i</div>
+        <p>
+          最長的滯後是 <strong>24 小時</strong>，這代表模型要「暖機」滿 <strong>25 小時</strong>的連續觀測，
+          最新一筆的滯後特徵才會是完整的。上線的頭一天，預測會標記 <code class="inline">warmup=True</code>，
+          儀表板會顯示暖機橫幅，而且<strong>這段期間的預測不列入成效統計</strong>——
+          放進去只會讓數字虛胖，沒有意義。
+        </p>
+      </div>
+
+      <h3>怎麼避免用到「未來」的資料</h3>
+      <p>
+        預測 <code class="inline">t+h</code> 小時後的 PM2.5 時，<code class="inline">t</code>
+        時刻的觀測值是「已經拿得到的資訊」，所以特別留了一欄 <code class="inline">pm2.5_now</code> 當合法特徵；
+        但原始的 <code class="inline">pm2.5</code> 欄位（也就是目標欄位本身）會被明確排除在特徵矩陣外，
+        滾動與差分也全部只往過去看（<code class="inline">rolling()</code>、<code class="inline">diff(正數)</code>）。
+        目標值本身用 <code class="inline">shift(-horizon)</code> 產生，訓練與驗證之間另外留了
+        <strong>24 小時空隙</strong>（<code class="inline">TimeSeriesSplit(gap=24)</code>），
+        雙重防止資訊從未來洩漏回訓練集。
+      </p>
+    </section>
+
+    <section class="chapter" id="train">
+      <div class="chapter-head"><span class="chapter-num">04</span><h2>訓練與回測</h2></div>
+      <p class="chapter-dek">四種演算法賽馬，時間序列交叉驗證挑最佳者，再用完全沒看過的資料驗一次。</p>
+
+      <p><code class="inline">train.py</code> 針對每個預測時距（+1h、+3h）各自訓練，
+      每個候選模型都是 <code class="inline">補值 → Min-Max 正規化 → 迴歸器</code> 的
+      pipeline，就算即時資料臨時缺一兩個欄位也不會整條掛掉。</p>
+
+      <div class="code-block">
+        <div class="bar"><span>terminal</span><button class="copy-btn" data-copy="python -m pipeline.train
+python -m pipeline.backtest --holdout-days 45">複製</button></div>
+        <pre><code><span class="comment"># 訓練 +1h 與 +3h 兩個模型（約 1~2 分鐘）</span>
+python -m pipeline.train
+
+<span class="comment"># 用最後 45 天做保留期回測</span>
+python -m pipeline.backtest --holdout-days 45</code></pre>
+      </div>
+
+      <h3>候選演算法</h3>
+      <p>RandomForest、HistGradientBoosting、Ridge，加上有裝才會參戰的 LightGBM。
+      用 <code class="inline">TimeSeriesSplit(n_splits=5, gap=24)</code> 各跑 5 摺交叉驗證，
+      RMSE 差距在 1% 以內視為平手，平手時優先選<strong>模型檔比較小</strong>的——
+      模型要 commit 進 repo，體積會隨每月重訓累積。</p>
+
+      <h3>回測成效（實測基準）</h3>
+      <p>用 2026-06-16 ~ 07-31（45 天）完全沒參與訓練的資料驗證：</p>
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th>時距</th><th class="num">MAE</th><th class="num">RMSE</th><th class="num">R²</th><th class="num">勝過 persistence</th><th class="num">誤差 ≤5 佔比</th></tr></thead>
+          <tbody>
+            <tr><td>+1 小時</td><td class="num">2.25</td><td class="num">2.88</td><td class="num">0.58</td><td class="num good">+7.9%</td><td class="num">92.0%</td></tr>
+            <tr><td>+3 小時</td><td class="num">2.94</td><td class="num">3.77</td><td class="num">0.29</td><td class="num good">+12.9%</td><td class="num">82.5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout note">
+        <div class="icon">?</div>
+        <p><strong>「勝過 persistence」是什麼？</strong>
+        persistence 基準線＝「假設下一小時濃度和現在一樣」。PM2.5 本來就有很強的時間自相關，
+        這個笨方法的 MAE 通常就已經不差了。模型如果贏不過它，代表沒有真正的預測能力——
+        所以這一欄比單看 MAE 本身更重要，正值才算及格。</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="hourly">
+      <div class="chapter-head"><span class="chapter-num">05</span><h2>每小時自動化流程</h2></div>
+      <p class="chapter-dek"><code class="inline">run_hourly.py</code> 依序呼叫五個模組，這是 GitHub Actions 每小時實際執行的內容。</p>
+
+      <ol>
+        <li><strong>fetch</strong> — 呼叫環境部 API 拿最新一小時的 5 站觀測，補氣象欄位，累加寫入
+          <code class="inline">observations.csv</code>（同測站同時間戳記只留最新一筆）。</li>
+        <li><strong>predict</strong> — 讀最近 72 小時觀測、算特徵，用存好的模型預測 +1h／+3h，寫入
+          <code class="inline">predictions.csv</code>。</li>
+        <li><strong>evaluate</strong> — 把之前產生、目標時間已經到了的預測，對上這次抓到的實際值，
+          算 MAE / RMSE / R² / bias，並和 persistence 基準比較，輸出 <code class="inline">docs/metrics.json</code>。</li>
+        <li><strong>dashboard</strong> — 用 metrics.json 重新產生 <code class="inline">docs/index.html</code>，
+          純 inline SVG 畫圖，零外部相依，離線也打得開。</li>
+        <li><strong>notify</strong>（選用）— 沒設定 LINE 金鑰就直接跳過；有設定的話，實測或預測超過門檻
+          （預設 35.5 µg/m³，對應「對敏感族群不健康」等級）才會推播，不會每小時洗版。</li>
+      </ol>
+
+      <div class="callout warn">
+        <div class="icon">!</div>
+        <p>任一關鍵步驟（fetch／predict／evaluate／dashboard）失敗，
+          <code class="inline">run_hourly.py</code> 會印出完整錯誤並回傳非零狀態碼，
+          讓 GitHub Actions 把那次執行標記成失敗，方便你在 Actions 頁面一眼看到。
+          但 <code class="inline">notify</code> 失敗只會警告，不影響資料與儀表板。</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="deploy">
+      <div class="chapter-head"><span class="chapter-num">06</span><h2>上架到 GitHub</h2></div>
+      <p class="chapter-dek">從本機推上去，到排程真的開始跑，一共四步。</p>
+
+      <ol class="steps">
+        <li class="step">
+          <div class="num">01</div>
+          <div>
+            <h4>本機先跑過一輪，確認金鑰沒問題</h4>
+            <p>訓練與回測都要在本機先做一次——GitHub Actions 只負責「每小時抓資料＋預測」，
+              不負責從零訓練模型，模型檔是直接被 commit 進 repo 帶上去的。</p>
+            <div class="code-block">
+              <div class="bar"><span>terminal</span><button class="copy-btn" data-copy="pip install -r requirements.txt
+cp .env.example .env
+python -m pipeline.build_history
+python -m pipeline.train
+python -m pipeline.backtest
+python run_hourly.py">複製</button></div>
+              <pre><code>pip install -r requirements.txt
+cp .env.example .env          <span class="comment"># 填入 MOENV_API_KEY 與 CWA_API_KEY</span>
+python -m pipeline.build_history
+python -m pipeline.train
+python -m pipeline.backtest
+python run_hourly.py          <span class="comment"># 實跑一次，確認 API 金鑰沒問題</span></code></pre>
+            </div>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="num">02</div>
+          <div>
+            <h4>推上 GitHub</h4>
+            <p><code class="inline">.env</code> 已經在 <code class="inline">.gitignore</code> 裡，金鑰不會被推上去。
+              <code class="inline">data/monitor/</code>、<code class="inline">models/</code>、
+              <code class="inline">docs/</code> 則是<strong>刻意</strong>要進版控的——
+              之後 Actions 每小時會把新資料 commit 回這個 repo，等於拿 git 當資料庫。</p>
+            <div class="code-block">
+              <div class="bar"><span>terminal</span><button class="copy-btn" data-copy="git init
+git add .
+git commit -m &quot;feat: 桃園測站 PM2.5 即時監控自動化&quot;
+git branch -M main
+git remote add origin https://github.com/&lt;帳號&gt;/&lt;repo&gt;.git
+git push -u origin main">複製</button></div>
+              <pre><code>git init
+git add .
+git commit -m <span class="comment">"feat: 桃園測站 PM2.5 即時監控自動化"</span>
+git branch -M main
+git remote add origin https://github.com/&lt;帳號&gt;/&lt;repo&gt;.git
+git push -u origin main</code></pre>
+            </div>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="num">03</div>
+          <div>
+            <h4>設定 repository secrets</h4>
+            <p><span class="kbd">Settings</span> → <span class="kbd">Secrets and variables</span> →
+              <span class="kbd">Actions</span> → <span class="kbd">New repository secret</span>，
+              名稱要和 <code class="inline">pipeline/settings.py</code> 讀取的環境變數<strong>完全一致</strong>：</p>
+            <div class="table-wrap">
+              <table class="data">
+                <thead><tr><th>Secret 名稱</th><th>必要性</th><th>說明</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">MOENV_API_KEY</code></td><td>必要</td><td>環境部開放資料平台金鑰</td></tr>
+                  <tr><td><code class="inline">CWA_API_KEY</code></td><td>建議</td><td>沒有的話氣溫/濕度缺值，模型仍能跑，準度較差</td></tr>
+                  <tr><td><code class="inline">LINE_CHANNEL_ACCESS_TOKEN</code></td><td>選用</td><td>要 LINE 推播才需要</td></tr>
+                  <tr><td><code class="inline">LINE_USER_ID</code></td><td>選用</td><td>同上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="num">04</div>
+          <div>
+            <h4>開啟 GitHub Pages，驗證排程</h4>
+            <p><span class="kbd">Settings</span> → <span class="kbd">Pages</span> → Source 選
+              <span class="kbd">Deploy from a branch</span>，Branch 選 <span class="kbd">main</span> +
+              <span class="kbd">/docs</span>，按 Save。一兩分鐘後儀表板就會在
+              <code class="inline">https://&lt;帳號&gt;.github.io/&lt;repo&gt;/</code> 上線。</p>
+            <p>接著到 <span class="kbd">Actions</span> 分頁找到「每小時空品監控」，
+              按 <span class="kbd">Run workflow</span> 手動觸發一次，確認能跑成功、
+              而且真的把新資料 commit 回 repo（工作流程結尾有 <code class="inline">git push</code>）。</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="chapter" id="dashboard">
+      <div class="chapter-head"><span class="chapter-num">07</span><h2>儀表板怎麼看</h2></div>
+      <p class="chapter-dek">docs/index.html 由 dashboard.py 每小時重新產生，幾個欄位值得多看一眼。</p>
+
+      <ul>
+        <li><strong>偏差（bias）</strong>——正值代表系統性高估、負值代表低估。長期偏向同一邊，
+          就是重訓的訊號。</li>
+        <li><strong>勝過基準</strong>——見上一節，這是判斷模型有沒有用的第一指標。</li>
+        <li><strong>等級命中率</strong>——預測與實際落在同一個 PM2.5 空品等級
+          （良好／普通／對敏感族群不健康…）的比例。對「要不要發警示」這個決策，
+          比單看 MAE 更貼近實際用途。</li>
+      </ul>
+
+      <p>成效分成兩種並列顯示：<strong>歷史回測成效</strong>是上線前就算得出來的（見上一節）；
+      <strong>即時監控成效</strong>是上線後累積的真實表現，會隨時間越來越有代表性，
+      拆成近 24 小時／7 天／30 天／全部四個統計窗格。</p>
+
+      <p>原始資料都留著沒有藏起來：<code class="inline">data/monitor/scores.csv</code>
+      是逐筆的預測與實際值對照，可以直接拉進 Excel 或 Python 自己分析。</p>
+    </section>
+
+    <section class="chapter" id="faq">
+      <div class="chapter-head"><span class="chapter-num">08</span><h2>常見問題與限制</h2></div>
+      <p class="chapter-dek">上線前該知道的幾件事，省得半夜被 Actions 失敗通知嚇醒。</p>
+
+      <div class="callout warn">
+        <div class="icon">!</div>
+        <p><strong>建模 notebook 裡有寫死的 LINE token，推上 GitHub 前務必先處理。</strong></p>
+        <p><code class="inline">桃園空品分析建模(16個模型3個模式).ipynb</code>
+          最後一個 cell 直接寫死了真實的 LINE Channel Access Token 與 User ID。
+          一旦推上去，這串字就永遠留在 git 歷史裡，事後刪掉 cell 也救不回來。
+          正確做法：先到 LINE Developers Console <strong>撤銷、重發</strong>該 token，
+          再把 cell 改成讀環境變數（寫法可以直接參考 <code class="inline">pipeline/notify.py</code>）。</p>
+      </div>
+
+      <h3>已知限制</h3>
+      <ul>
+        <li><strong>前 25 小時是暖機期</strong>，預測僅供參考、不列入成效統計（見第 3 節）。</li>
+        <li><strong>GitHub Actions 的排程不保證準時</strong>，尖峰時段延遲 5~20 分鐘很常見，
+          偶爾會整點跳過——管線設計成「補得回來」，漏一小時只是少一筆觀測，不會壞掉。</li>
+        <li><strong>repo 連續 60 天沒有 commit，GitHub 會自動停用排程。</strong>
+          本管線每小時都會 commit，正常運作下不會觸發；如果手動停用過再恢復，
+          記得回 Actions 頁面確認排程還活著。</li>
+        <li><strong>模型檔會進版控</strong>，每個約 1.9 MB。重訓設成每月一次而不是每週，
+          避免 repo 體積長太快；要更頻繁可以改 <code class="inline">monthly-retrain.yml</code> 的 cron。</li>
+        <li><strong>即時 API 只給當下一小時</strong>，歷史缺口補不回來。漏很多的話，
+          等環境部把該月資料上架後重跑 <code class="inline">build_history</code> 補進
+          <code class="inline">history.csv</code>。</li>
+      </ul>
+
+      <h3>換一個監控站</h3>
+      <p>例如想改成監控平鎮站：</p>
+      <div class="code-block">
+        <div class="bar"><span>terminal</span><button class="copy-btn" data-copy="TARGET_STATION=平鎮 python -m pipeline.train
+TARGET_STATION=平鎮 python run_hourly.py">複製</button></div>
+        <pre><code>TARGET_STATION=平鎮 python -m pipeline.train
+TARGET_STATION=平鎮 python run_hourly.py</code></pre>
+      </div>
+      <p>Actions 上要換站，就在 workflow 的 <code class="inline">env:</code>
+      區塊加一行 <code class="inline">TARGET_STATION: 平鎮</code>。</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="page-end">
+  <div class="shell">
+    <p>桃園市空品即時預測模型 · 自動化教學手冊</p>
+    <p>對應程式：<code class="inline">pipeline/</code> · <code class="inline">run_hourly.py</code> · <code class="inline">.github/workflows/</code></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // 複製按鈕
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = btn.getAttribute('data-copy') || '';
+      var done = function(){ var old = btn.textContent; btn.textContent = '已複製'; setTimeout(function(){ btn.textContent = old; }, 1400); };
+      try{
+        if (navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(text).then(done).catch(function(){});
+        } else {
+          var ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); done(); } catch(e){}
+          document.body.removeChild(ta);
+        }
+      } catch(e){}
+    });
+  });
+
+  // TOC 主動高亮
+  var links = Array.prototype.slice.call(document.querySelectorAll('#toc a'));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  if ('IntersectionObserver' in window && sections.length){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var id = '#' + entry.target.id;
+        var link = links.find(function(a){ return a.getAttribute('href') === id; });
+        if (!link) return;
+        if (entry.isIntersecting){
+          links.forEach(function(a){ a.classList.remove('active'); });
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    sections.forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  // 這份是離線備份用的獨立 HTML 檔，本機沒有 Claude Artifact 那套原生 mermaid 渲染，
+  // 所以額外載入 mermaid.js 讓「架構總覽」章節的兩張流程圖能正常顯示。
+  if (window.mermaid) {
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'loose' });
+  }
+</script>
+
+</body>
+</html>

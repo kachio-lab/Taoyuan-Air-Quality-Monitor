@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>桃園測站 PM2.5 即時監控</title>
+<style>
+  :root {
+    --bg:#F8FAFC; --card:#FFFFFF; --ink:#0F172A; --muted:#64748B;
+    --line:#E2E8F0; --good:#16A34A; --bad:#DC2626; --accent:#2563EB;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0B1220; --card:#151E2E; --ink:#E6EDF7; --muted:#94A3B8; --line:#25324A; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font:15px/1.6 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif; }
+  .wrap { max-width:1080px; margin:0 auto; padding:28px 18px 64px; }
+  header h1 { margin:0 0 4px; font-size:26px; letter-spacing:.5px; }
+  header p { margin:0; color:var(--muted); font-size:13px; }
+  section { margin-top:32px; }
+  h2 { font-size:17px; margin:0 0 12px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+  .note { color:var(--muted); font-size:13px; margin:0 0 14px; }
+  .metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; }
+  .metric { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }
+  .metric.good { border-left:4px solid var(--good); }
+  .metric.bad { border-left:4px solid var(--bad); }
+  .metric-label { color:var(--muted); font-size:12px; letter-spacing:.5px; }
+  .metric-value { font-size:32px; font-weight:600; line-height:1.2; margin:4px 0; }
+  .metric-sub { color:var(--muted); font-size:12px; }
+  table { width:100%; border-collapse:collapse; background:var(--card);
+    border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:13px; }
+  th,td { padding:9px 12px; text-align:right; border-bottom:1px solid var(--line); }
+  th:first-child,td:first-child,th:nth-child(2),td:nth-child(2) { text-align:left; }
+  thead th { background:rgba(37,99,235,.08); font-weight:600; color:var(--muted); }
+  tbody tr:last-child td { border-bottom:none; }
+  td.good { color:var(--good); font-weight:600; }
+  td.bad { color:var(--bad); font-weight:600; }
+  .table-scroll { overflow-x:auto; }
+  .chart { width:100%; height:auto; background:var(--card);
+    border:1px solid var(--line); border-radius:12px; padding:6px; }
+  .chart-title { font-size:13px; color:var(--muted); margin-bottom:6px; }
+  .grid { stroke:var(--line); stroke-width:1; }
+  .axis { fill:var(--muted); font-size:11px; }
+  .legend { margin:8px 0 0; font-size:12px; color:var(--muted); }
+  .legend-item { margin-right:16px; white-space:nowrap; }
+  .legend-item i { display:inline-block; width:10px; height:10px; border-radius:2px;
+    margin-right:5px; vertical-align:middle; }
+  .empty { background:var(--card); border:1px dashed var(--line); border-radius:12px;
+    padding:22px; color:var(--muted); text-align:center; font-size:13px; }
+  .banner { border-radius:10px; padding:12px 16px; font-size:13px; margin-top:16px; }
+  .banner.warn { background:rgba(249,115,22,.12); border:1px solid rgba(249,115,22,.35); }
+  footer { margin-top:40px; color:var(--muted); font-size:12px; text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>桃園測站 PM2.5 即時監控</h1>
+    <p>資料來源：環境部 aqx_p_432 ・ 中央氣象署 O-A0001-001｜每小時由 GitHub Actions 自動更新｜
+       最後更新 2026-09-14T19:16:22</p>
+  </header>
+
+  <div class="banner warn">暖機中：目前累積 4 小時觀測，滿 25 小時後滯後特徵才完整，在那之前的預測僅供參考、也不列入成效統計。</div>
+
+  <section>
+    <h2>目前狀況與預報</h2>
+    <div class="metrics"><div class="metric "><div class="metric-label">目前實測 PM2.5</div><div class="metric-value"><span style="color:#22C55E">10.0</span></div><div class="metric-sub">µg/m³ · 良好<br>觀測時間 2026-09-11 21:00:00</div></div><div class="metric "><div class="metric-label">+1 小時預測</div><div class="metric-value"><span style="color:#22C55E">10.1</span></div><div class="metric-sub">µg/m³ · 良好<br>目標時間 2026-09-11 22:00:00</div></div><div class="metric "><div class="metric-label">+3 小時預測</div><div class="metric-value"><span style="color:#22C55E">9.1</span></div><div class="metric-sub">µg/m³ · 良好<br>目標時間 2026-09-12 00:00:00</div></div></div>
+    <div class="legend"><span class="legend-item"><i style="background:#22C55E"></i>良好（0–15.4）</span><span class="legend-item"><i style="background:#FACC15"></i>普通（15.5–35.4）</span><span class="legend-item"><i style="background:#F97316"></i>對敏感族群不健康（35.5–54.4）</span><span class="legend-item"><i style="background:#EF4444"></i>對所有族群不健康（54.5–150.4）</span></div>
+  </section>
+
+  <section>
+    <h2>實際值 vs 預測值</h2>
+    <div class="empty">桃園測站 PM2.5：近 72 小時實際值 vs 預測值：資料還不夠，累積幾小時後就會出現</div>
+  </section>
+
+  <section>
+    <h2>即時監控成效</h2>
+    <p class="note">「勝過基準」是和 persistence 基準線（假設濃度維持不變）比較的 MAE 改善幅度，
+       正值代表模型真的有預測能力；「等級命中率」是預測與實際落在同一個 PM2.5 空品等級的比例。
+       待驗證 7 筆（目標時間還沒到）。</p>
+    <div class="table-scroll"><div class="empty">暖機中：目前只有暖機期的預測，滯後特徵不完整，依規則不列入成效統計。累積滿 25 小時觀測後這張表就會開始有數字；在那之前請先看下方的歷史回測成效。</div></div>
+    
+  </section>
+
+  <section><h2>歷史回測成效</h2><p class="note">用 45 天的保留期驗證（2026-06-16 22:00:00 ~ 2026-07-31 22:00:00，共 1017 筆）。這段期間的資料完全沒有參與訓練，可以當作上線前的成效預期值。</p><div class="metrics"><div class="metric good"><div class="metric-label">+1 小時（回測）</div><div class="metric-value">2.25</div><div class="metric-sub">MAE µg/m³ · RMSE 2.88 · R² 0.58<br>勝過 persistence 7.9% · 誤差 ≤5 佔 92.0%</div></div><div class="metric good"><div class="metric-label">+3 小時（回測）</div><div class="metric-value">2.94</div><div class="metric-sub">MAE µg/m³ · RMSE 3.77 · R² 0.29<br>勝過 persistence 12.9% · 誤差 ≤5 佔 82.5%</div></div></div></section>
+
+  <section>
+    <h2>最近 20 筆預測對照</h2>
+    <div class="table-scroll"><table><thead><tr><th>目標時間</th><th>時距</th><th>實際</th><th>預測</th><th>誤差</th><th>基準線誤差</th><th>實際等級</th></tr></thead><tbody><tr><td>09/03 11:00</td><td>+1h</td><td>2.0</td><td>2.4</td><td class="bad">+nan</td><td>+nan</td><td>良好</td></tr></tbody></table></div>
+  </section>
+
+  <section>
+    <h2>模型與系統狀態</h2>
+    <div class="table-scroll"><table>
+      <thead><tr><th>目標</th><th>時距</th><th>演算法</th><th>訓練筆數</th><th>CV RMSE</th><th>CV R²</th><th>訓練時間</th></tr></thead>
+      <tbody><tr><td>ox</td><td>+1h</td><td>HistGradientBoosting</td><td>13229</td><td>4.54</td><td>0.90</td><td>2026-09-14T17:45:23</td></tr><tr><td>ox</td><td>+3h</td><td>HistGradientBoosting</td><td>13200</td><td>8.19</td><td>0.66</td><td>2026-09-14T17:46:03</td></tr><tr><td>pm2.5</td><td>+1h</td><td>RandomForest</td><td>13511</td><td>3.56</td><td>0.76</td><td>2026-09-14T17:44:08</td></tr><tr><td>pm2.5</td><td>+3h</td><td>RandomForest</td><td>13497</td><td>4.90</td><td>0.54</td><td>2026-09-14T17:44:48</td></tr></tbody>
+    </table></div>
+    <p class="note">累積觀測 4 列
+       ・ 已評分 1 筆 ・ 暖機排除 1 筆。
+       原始資料：data/monitor/scores.csv、<a href="metrics.json">metrics.json</a>。</p>
+  </section>
+
+  <footer>桃園市空品即時預測模型 ・ 本頁由 pipeline/dashboard.py 自動產生</footer>
+</div>
+</body>
+</html>

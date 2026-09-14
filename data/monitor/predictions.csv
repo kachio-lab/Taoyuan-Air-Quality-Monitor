@@ -1,0 +1,9 @@
+﻿run_at,station,base_time,horizon_h,target_time,y_pred,persistence_pred,algorithm,warmup,pm25_pred,pm25_persistence,ox_pred,ox_persistence,algorithm_pm25,algorithm_ox
+2026-09-03 11:11:55,桃園,2026-09-03 10:00:00,1,2026-09-03 11:00:00,2.4,2.0,RandomForestRegressor,True,,,,,,
+2026-09-03 11:23:27,桃園,2026-09-03 11:00:00,1,2026-09-03 12:00:00,2.45,2.0,RandomForestRegressor,True,,,,,,
+2026-09-03 11:11:55,桃園,2026-09-03 10:00:00,3,2026-09-03 13:00:00,2.88,2.0,RandomForestRegressor,True,,,,,,
+2026-09-03 11:23:27,桃園,2026-09-03 11:00:00,3,2026-09-03 14:00:00,2.88,2.0,RandomForestRegressor,True,,,,,,
+2026-09-07 11:25:26,桃園,2026-09-07 11:00:00,1,2026-09-07 12:00:00,9.66,10.0,RandomForestRegressor,True,,,,,,
+2026-09-07 11:25:26,桃園,2026-09-07 11:00:00,3,2026-09-07 14:00:00,9.37,10.0,RandomForestRegressor,True,,,,,,
+2026-09-14 19:16:20,桃園,2026-09-11 21:00:00,1,2026-09-11 22:00:00,,,,True,10.14,10.0,41.15,42.0,RandomForestRegressor,HistGradientBoostingRegressor
+2026-09-14 19:16:20,桃園,2026-09-11 21:00:00,3,2026-09-12 00:00:00,,,,True,9.14,10.0,38.57,42.0,RandomForestRegressor,HistGradientBoostingRegressor

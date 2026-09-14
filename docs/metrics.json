@@ -1,0 +1,174 @@
+{
+  "generated_at": "2026-09-14T19:16:22",
+  "pending": 7,
+  "warmup_excluded": 1,
+  "warmup_only": true,
+  "horizons": {},
+  "status": {
+    "station": "桃園",
+    "observation_rows": 4,
+    "observation_hours": 4,
+    "latest_obs_time": "2026-09-11 21:00:00",
+    "latest_pm25": 10.0,
+    "latest_band": "良好",
+    "latest_color": "#22C55E",
+    "forecasts": [
+      {
+        "target_time": "2026-09-11 22:00:00",
+        "horizon_h": 1,
+        "y_pred": 10.14,
+        "band": "良好",
+        "color": "#22C55E"
+      },
+      {
+        "target_time": "2026-09-12 00:00:00",
+        "horizon_h": 3,
+        "y_pred": 9.14,
+        "band": "良好",
+        "color": "#22C55E"
+      }
+    ],
+    "warmup": true,
+    "model": {
+      "station": "桃園",
+      "models": {
+        "pm2.5_h1": {
+          "station": "桃園",
+          "target": "pm2.5",
+          "horizon": 1,
+          "model_file": "pm25_桃園_h1.joblib",
+          "best_algorithm": "RandomForest",
+          "feature_count": 43,
+          "train_rows": 13511,
+          "train_start": "2025-01-01 01:00:00",
+          "train_end": "2026-07-31 22:00:00",
+          "cv": {
+            "cv_rmse": 3.558919603725409,
+            "cv_mae": 2.654854955184155,
+            "cv_r2": 0.7567647307832666,
+            "cv_rmse_folds": [
+              4.0034,
+              3.2524,
+              3.3338,
+              4.1241,
+              3.0809
+            ]
+          },
+          "cv_all": {
+            "HistGradientBoosting": 3.6485,
+            "RandomForest": 3.5589,
+            "Ridge": 3.8701,
+            "LightGBM": 3.65
+          },
+          "persistence_baseline": {
+            "rmse": 3.943708846931972,
+            "mae": 2.7574899388880607
+          },
+          "trained_at": "2026-09-14T17:44:08"
+        },
+        "pm2.5_h3": {
+          "station": "桃園",
+          "target": "pm2.5",
+          "horizon": 3,
+          "model_file": "pm25_桃園_h3.joblib",
+          "best_algorithm": "RandomForest",
+          "feature_count": 43,
+          "train_rows": 13497,
+          "train_start": "2025-01-01 01:00:00",
+          "train_end": "2026-07-31 20:00:00",
+          "cv": {
+            "cv_rmse": 4.899501192867291,
+            "cv_mae": 3.749958443812963,
+            "cv_r2": 0.5409196104827896,
+            "cv_rmse_folds": [
+              5.773,
+              4.5161,
+              4.4769,
+              5.6471,
+              4.0843
+            ]
+          },
+          "cv_all": {
+            "HistGradientBoosting": 5.2374,
+            "RandomForest": 4.8995,
+            "Ridge": 5.3191,
+            "LightGBM": 5.2135
+          },
+          "persistence_baseline": {
+            "rmse": 5.559050098135531,
+            "mae": 3.9708890050011196
+          },
+          "trained_at": "2026-09-14T17:44:48"
+        },
+        "ox_h1": {
+          "station": "桃園",
+          "target": "ox",
+          "horizon": 1,
+          "model_file": "ox_桃園_h1.joblib",
+          "best_algorithm": "HistGradientBoosting",
+          "feature_count": 43,
+          "train_rows": 13229,
+          "train_start": "2025-01-01 01:00:00",
+          "train_end": "2026-07-31 22:00:00",
+          "cv": {
+            "cv_rmse": 4.541659858189993,
+            "cv_mae": 3.1333722640297474,
+            "cv_r2": 0.899244925648989,
+            "cv_rmse_folds": [
+              5.9137,
+              6.0024,
+              2.8204,
+              3.2417,
+              4.7301
+            ]
+          },
+          "cv_all": {
+            "HistGradientBoosting": 4.5417,
+            "RandomForest": 4.6105,
+            "Ridge": 4.6961,
+            "LightGBM": 4.5173
+          },
+          "persistence_baseline": {
+            "rmse": 4.70153382546824,
+            "mae": 2.981401040073417
+          },
+          "trained_at": "2026-09-14T17:45:23"
+        },
+        "ox_h3": {
+          "station": "桃園",
+          "target": "ox",
+          "horizon": 3,
+          "model_file": "ox_桃園_h3.joblib",
+          "best_algorithm": "HistGradientBoosting",
+          "feature_count": 43,
+          "train_rows": 13200,
+          "train_start": "2025-01-01 01:00:00",
+          "train_end": "2026-07-31 20:00:00",
+          "cv": {
+            "cv_rmse": 8.188066039777087,
+            "cv_mae": 5.972411336886393,
+            "cv_r2": 0.6596290366202859,
+            "cv_rmse_folds": [
+              10.6178,
+              10.0216,
+              6.3096,
+              5.6038,
+              8.3876
+            ]
+          },
+          "cv_all": {
+            "HistGradientBoosting": 8.1881,
+            "RandomForest": 8.1322,
+            "Ridge": 9.0803,
+            "LightGBM": 8.1809
+          },
+          "persistence_baseline": {
+            "rmse": 10.351684938342762,
+            "mae": 6.817384924312635
+          },
+          "trained_at": "2026-09-14T17:46:03"
+        }
+      }
+    }
+  }
+}

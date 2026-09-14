@@ -1,0 +1,35 @@
+{
+  "station": "桃園",
+  "holdout_days": 45,
+  "generated_at": "2026-09-14T17:46:04",
+  "horizons": {
+    "1": {
+      "algorithm": "RandomForest",
+      "train_rows": 12494,
+      "test_rows": 1017,
+      "test_start": "2026-06-16 22:00:00",
+      "test_end": "2026-07-31 22:00:00",
+      "mae": 2.247,
+      "rmse": 2.875,
+      "bias": 0.337,
+      "r2": 0.581,
+      "baseline_mae": 2.439,
+      "skill_vs_baseline_pct": 7.9,
+      "coverage_pct": 92.0
+    },
+    "3": {
+      "algorithm": "RandomForest",
+      "train_rows": 12484,
+      "test_rows": 1013,
+      "test_start": "2026-06-16 20:00:00",
+      "test_end": "2026-07-31 20:00:00",
+      "mae": 2.936,
+      "rmse": 3.768,
+      "bias": 0.38,
+      "r2": 0.286,
+      "baseline_mae": 3.371,
+      "skill_vs_baseline_pct": 12.9,
+      "coverage_pct": 82.5
+    }
+  }
+}

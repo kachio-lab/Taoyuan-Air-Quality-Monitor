@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pandoc -t markdown \"桃園市空品即時預測模型訓練與建置_專案計畫書_V4.docx\")"
+    ]
+  }
+}
