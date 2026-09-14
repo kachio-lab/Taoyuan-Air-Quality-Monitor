@@ -96,11 +96,10 @@ def fetch_cwa_stations() -> pd.DataFrame:
 
     resp = requests.get(
     CWA_API_URL,
-    headers={"Authorization": CWA_API_KEY},
-    params={"format": "JSON"},
+    params={"Authorization": CWA_API_KEY, "format": "JSON"},
     timeout=REQUEST_TIMEOUT,
     verify=False,
-    )
+)
     resp.raise_for_status()
     stations = resp.json().get("records", {}).get("Station", [])
     if not stations:
