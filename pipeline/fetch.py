@@ -95,10 +95,11 @@ def fetch_cwa_stations() -> pd.DataFrame:
         raise RuntimeError("缺少 CWA_API_KEY")
 
     resp = requests.get(
-        CWA_API_URL,
-        params={"Authorization": CWA_API_KEY, "format": "JSON"},
-        timeout=REQUEST_TIMEOUT,
-        verify=False,
+    CWA_API_URL,
+    headers={"Authorization": CWA_API_KEY},
+    params={"format": "JSON"},
+    timeout=REQUEST_TIMEOUT,
+    verify=False,
     )
     resp.raise_for_status()
     stations = resp.json().get("records", {}).get("Station", [])
