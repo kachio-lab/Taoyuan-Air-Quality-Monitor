@@ -33,7 +33,9 @@ jobs:
           python-version: "3.11"
           
       - name: 安裝套件
-        run: pip install --no-cache-dir --force-reinstall -r requirements.txt
+        run: |
+          pip install --no-cache-dir scikit-learn==1.7.2
+          pip install -r requirements.txt
 
       - name: 抓取 → 預測 → 評分 → 產生儀表板
         run: python run_hourly.py
