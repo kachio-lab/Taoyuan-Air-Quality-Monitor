@@ -114,22 +114,26 @@ def fmt(value, digits: int = 2, suffix: str = "") -> str:
     return f"{value:.{digits}f}{suffix}"
 
 
-def performance_table(horizons: dict, warmup_only: bool = False) -> str:
+def performance_table(horizons: dict, warmup_only: bool = False, target: str = "pm25") -> str:
     rows = []
     for h in sorted(horizons, key=int):
+        h_data = horizons[h]
+        # 支援新格式 {"pm25": {...}, "ox": {...}} 和舊格式 {"24h": {...}, ...}
+        windows = h_data.get(target, h_data) if target in h_data else h_data
         for window, label in (("24h", "近 24 小時"), ("7d", "近 7 天"), ("30d", "近 30 天"), ("all", "全部")):
-            m = horizons[h].get(window)
+            m = windows.get(window)
             if not m:
                 continue
             skill = m.get("skill_vs_baseline_pct")
             tone = "good" if skill is not None and skill > 0 else ("bad" if skill is not None else "")
+            band_hit = fmt(m.get("band_hit_rate"), 1, "%") if target == "pm25" else "—"
             rows.append(
                 f"<tr><td>+{h}h</td><td>{label}</td><td>{m['n']}</td>"
                 f"<td>{fmt(m['mae'])}</td><td>{fmt(m['rmse'])}</td>"
                 f"<td>{fmt(m['r2'])}</td><td>{fmt(m['bias'])}</td>"
                 f"<td>{fmt(m['baseline_mae'])}</td>"
                 f"<td class='{tone}'>{fmt(skill, 1, '%')}</td>"
-                f"<td>{fmt(m['band_hit_rate'], 1, '%')}</td></tr>"
+                f"<td>{band_hit}</td></tr>"
             )
     if not rows:
         msg = (
@@ -208,7 +212,7 @@ def build_html(station: str) -> str:
             f'µg/m³ · {html.escape(f["band"])}<br>目標時間 {html.escape(f["target_time"])}',
         ))
 
-    # --- 圖 1：實際 vs 預測 ---
+    # --- 圖 1：實際 vs 預測 PM2.5 ---
     chart_html = '<div class="empty">還沒有足夠的觀測可以畫圖</div>'
     if not obs.empty:
         cutoff = obs["publishtime"].max() - pd.Timedelta(hours=CHART_HOURS)
@@ -226,14 +230,39 @@ def build_html(station: str) -> str:
                 if len(sel) >= 2:
                     series[f"+{horizon}h 預測"] = (
                         sel["target_time"].tolist(),
-                        sel["y_pred"].astype(float).tolist(),
+                        sel["pm25_pred"].astype(float).tolist(),
                         color,
                     )
         chart_html = line_chart(series, f"{station}測站 PM2.5：近 {CHART_HOURS} 小時實際值 vs 預測值")
 
-    # --- 圖 2：預測誤差 ---
+    # --- 圖 1b：實際 vs 預測 OX ---
+    ox_chart_html = '<div class="empty">還沒有足夠的 OX 觀測可以畫圖</div>'
+    if not obs.empty and "o3" in obs.columns and "no2" in obs.columns:
+        cutoff = obs["publishtime"].max() - pd.Timedelta(hours=CHART_HOURS)
+        obs_ox = obs[obs["publishtime"] >= cutoff].copy()
+        obs_ox["ox_actual"] = pd.to_numeric(obs_ox["o3"], errors="coerce") + pd.to_numeric(obs_ox["no2"], errors="coerce")
+        obs_ox = obs_ox.dropna(subset=["ox_actual"])
+        ox_series: dict = {
+            "實際 OX": (obs_ox["publishtime"].tolist(), obs_ox["ox_actual"].astype(float).tolist(), "#0891B2"),
+        }
+        if not scores.empty and "ox_pred" in scores.columns:
+            for horizon, color in ((1, "#F97316"), (3, "#7C3AED")):
+                sel = scores[(scores["horizon_h"] == horizon) & (scores["target_time"] >= cutoff)].dropna(subset=["ox_pred"])
+                if len(sel) >= 2:
+                    ox_series[f"+{horizon}h OX 預測"] = (
+                        sel["target_time"].tolist(),
+                        sel["ox_pred"].astype(float).tolist(),
+                        color,
+                    )
+        if len(obs_ox) >= 2:
+            ox_chart_html = line_chart(ox_series, f"{station}測站 OX：近 {CHART_HOURS} 小時實際值 vs 預測值")
+
+    # --- 圖 2：預測誤差 PM2.5 ---
     err_chart = ""
-    graded = scores.dropna(subset=["y_true"]) if not scores.empty else pd.DataFrame()
+    graded = scores.dropna(subset=["y_true_pm25"]) if not scores.empty and "y_true_pm25" in scores.columns else (
+        scores.dropna(subset=["y_true"]) if not scores.empty and "y_true" in scores.columns else pd.DataFrame()
+    )
+    y_true_col = "y_true_pm25" if "y_true_pm25" in scores.columns else "y_true"
     if len(graded) >= 2:
         h1 = graded[graded["horizon_h"] == 1]
         if len(h1) >= 2:
@@ -242,26 +271,49 @@ def build_html(station: str) -> str:
                     "+1h 模型誤差": (h1["target_time"].tolist(), h1["error"].astype(float).tolist(), "#F97316"),
                     "基準線誤差": (h1["target_time"].tolist(), h1["baseline_error"].astype(float).tolist(), "#94A3B8"),
                 },
-                "逐筆預測誤差（預測值 − 實際值，越接近 0 越好）",
+                "PM2.5 逐筆預測誤差（預測值 − 實際值，越接近 0 越好）",
             )
 
-    # --- 最近 20 筆對照表 ---
+    # --- 最近 20 筆 PM2.5 對照表 ---
     recent_rows = ""
     if not graded.empty:
         for _, r in graded.sort_values("target_time", ascending=False).head(20).iterrows():
             better = abs(r["error"]) <= abs(r["baseline_error"])
             recent_rows += (
                 f'<tr><td>{r["target_time"]:%m/%d %H:%M}</td><td>+{int(r["horizon_h"])}h</td>'
-                f'<td>{r["y_true"]:.1f}</td><td>{r["y_pred"]:.1f}</td>'
+                f'<td>{r[y_true_col]:.1f}</td><td>{r["pm25_pred"]:.1f}</td>'
                 f'<td class="{"good" if better else "bad"}">{r["error"]:+.1f}</td>'
                 f'<td>{r["baseline_error"]:+.1f}</td>'
-                f'<td>{html.escape(str(r["true_band"]))}</td></tr>'
+                f'<td>{html.escape(str(r.get("true_band", "—")))}</td></tr>'
             )
     recent_table = (
-        '<table><thead><tr><th>目標時間</th><th>時距</th><th>實際</th><th>預測</th>'
+        '<table><thead><tr><th>目標時間</th><th>時距</th><th>實際 PM2.5</th><th>預測</th>'
         '<th>誤差</th><th>基準線誤差</th><th>實際等級</th></tr></thead>'
         f'<tbody>{recent_rows}</tbody></table>'
-        if recent_rows else '<div class="empty">尚無已驗證的預測</div>'
+        if recent_rows else '<div class="empty">尚無已驗證的 PM2.5 預測</div>'
+    )
+
+    # --- 最近 20 筆 OX 對照表 ---
+    ox_recent_rows = ""
+    if not scores.empty and "ox_pred" in scores.columns and "y_true_ox" in scores.columns:
+        ox_graded = scores.dropna(subset=["y_true_ox"])
+        for _, r in ox_graded.sort_values("target_time", ascending=False).head(20).iterrows():
+            if pd.isna(r.get("ox_pred")) or pd.isna(r.get("y_true_ox")):
+                continue
+            ox_err = r["ox_pred"] - r["y_true_ox"]
+            ox_base_err = (r.get("ox_persistence") or float("nan")) - r["y_true_ox"]
+            better = abs(ox_err) <= abs(ox_base_err) if not pd.isna(ox_base_err) else False
+            ox_recent_rows += (
+                f'<tr><td>{r["target_time"]:%m/%d %H:%M}</td><td>+{int(r["horizon_h"])}h</td>'
+                f'<td>{r["y_true_ox"]:.1f}</td><td>{r["ox_pred"]:.1f}</td>'
+                f'<td class="{"good" if better else "bad"}">{ox_err:+.1f}</td>'
+                f'<td>{ox_base_err:+.1f if not pd.isna(ox_base_err) else "—"}</td></tr>'
+            )
+    ox_recent_table = (
+        '<table><thead><tr><th>目標時間</th><th>時距</th><th>實際 OX</th><th>預測</th>'
+        '<th>誤差</th><th>基準線誤差</th></tr></thead>'
+        f'<tbody>{ox_recent_rows}</tbody></table>'
+        if ox_recent_rows else '<div class="empty">尚無已驗證的 OX 預測</div>'
     )
 
     # --- 系統狀態 ---
@@ -363,24 +415,40 @@ def build_html(station: str) -> str:
   </section>
 
   <section>
-    <h2>實際值 vs 預測值</h2>
+    <h2>實際值 vs 預測值（PM2.5）</h2>
     {chart_html}
   </section>
 
   <section>
-    <h2>即時監控成效</h2>
+    <h2>實際值 vs 預測值（OX）</h2>
+    {ox_chart_html}
+  </section>
+
+  <section>
+    <h2>即時監控成效（PM2.5）</h2>
     <p class="note">「勝過基準」是和 persistence 基準線（假設濃度維持不變）比較的 MAE 改善幅度，
        正值代表模型真的有預測能力；「等級命中率」是預測與實際落在同一個 PM2.5 空品等級的比例。
        待驗證 {metrics.get("pending", 0)} 筆（目標時間還沒到）。</p>
-    <div class="table-scroll">{performance_table(metrics.get("horizons", {}), metrics.get("warmup_only", False))}</div>
+    <div class="table-scroll">{performance_table(metrics.get("horizons", {}), metrics.get("warmup_only", False), "pm25")}</div>
     {err_chart}
+  </section>
+
+  <section>
+    <h2>即時監控成效（OX）</h2>
+    <p class="note">OX = O₃ + NO₂（總氧化劑），單位 ppb。</p>
+    <div class="table-scroll">{performance_table(metrics.get("horizons", {}), metrics.get("warmup_only", False), "ox")}</div>
   </section>
 
   {backtest_section()}
 
   <section>
-    <h2>最近 20 筆預測對照</h2>
+    <h2>最近 20 筆預測對照（PM2.5）</h2>
     <div class="table-scroll">{recent_table}</div>
+  </section>
+
+  <section>
+    <h2>最近 20 筆預測對照（OX）</h2>
+    <div class="table-scroll">{ox_recent_table}</div>
   </section>
 
   <section>
