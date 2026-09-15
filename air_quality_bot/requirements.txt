@@ -1,4 +1,4 @@
 flask==3.0.2
-pandas==2.2.0
+pandas==2.1.4
 apscheduler==3.10.4
 line-bot-sdk==3.9.0
