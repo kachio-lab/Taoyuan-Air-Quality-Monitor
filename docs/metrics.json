@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T12:32:11",
+  "generated_at": "2026-09-15T13:30:44",
   "pending": 7,
   "warmup_excluded": 1,
   "warmup_only": true,
@@ -16,7 +16,7 @@
       {
         "target_time": "2026-09-11 22:00:00",
         "horizon_h": 1,
-        "y_pred": 10.14,
+        "y_pred": 10.18,
         "band": "良好",
         "color": "#22C55E"
       },
