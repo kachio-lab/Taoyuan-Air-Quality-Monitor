@@ -307,7 +307,7 @@ def build_html(station: str) -> str:
                 f'<tr><td>{r["target_time"]:%m/%d %H:%M}</td><td>+{int(r["horizon_h"])}h</td>'
                 f'<td>{r["y_true_ox"]:.1f}</td><td>{r["ox_pred"]:.1f}</td>'
                 f'<td class="{"good" if better else "bad"}">{ox_err:+.1f}</td>'
-                f'<td>{ox_base_err:+.1f if not pd.isna(ox_base_err) else "—"}</td></tr>'
+                f'<td>{f"{ox_base_err:+.1f}" if not pd.isna(ox_base_err) else "—"}</td></tr>'
             )
     ox_recent_table = (
         '<table><thead><tr><th>目標時間</th><th>時距</th><th>實際 OX</th><th>預測</th>'
