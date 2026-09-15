@@ -166,6 +166,9 @@ def latest_status(station: str, scored: pd.DataFrame) -> dict:
     obs = pd.read_csv(OBSERVATIONS_CSV, encoding="utf-8-sig", parse_dates=["publishtime"])
     obs = obs[obs["sitename"] == station].sort_values("publishtime")
     latest = obs.dropna(subset=["pm2.5"]).iloc[-1] if obs["pm2.5"].notna().any() else None
+    # OX 最新實測（o3 + no2）
+    obs["ox_actual"] = pd.to_numeric(obs["o3"], errors="coerce") + pd.to_numeric(obs["no2"], errors="coerce")
+    latest_ox = obs.dropna(subset=["ox_actual"]).iloc[-1] if obs["ox_actual"].notna().any() else None
 
     # 現況卡片只顯示「最新一次執行」產生的預報，不要把歷史上還沒驗證到的舊預測也撈進來
     upcoming = scored[scored["base_time"] == scored["base_time"].max()].sort_values("horizon_h")
@@ -189,6 +192,7 @@ def latest_status(station: str, scored: pd.DataFrame) -> dict:
         "latest_pm25": float(latest["pm2.5"]) if latest is not None else None,
         "latest_band": aqi_band(float(latest["pm2.5"]))[0] if latest is not None else "無資料",
         "latest_color": aqi_band(float(latest["pm2.5"]))[1] if latest is not None else "#94A3B8",
+        "latest_ox": float(latest_ox["ox_actual"]) if latest_ox is not None else None,
         "forecasts": forecasts,
         "warmup": bool(scored["warmup"].astype(bool).iloc[-1]) if not scored.empty else True,
     }
