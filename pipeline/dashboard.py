@@ -211,7 +211,19 @@ def build_html(station: str) -> str:
             f'<span style="color:{f["color"]}">{f["y_pred"]:.1f}</span>',
             f'µg/m³ · {html.escape(f["band"])}<br>目標時間 {html.escape(f["target_time"])}',
         ))
-
+    # OX 預測卡片
+    if not scores.empty and "ox_pred" in scores.columns:
+        latest_scores = scores[scores["base_time"] == scores["base_time"].max()]
+        for _, row in latest_scores.sort_values("horizon_h").iterrows():
+            if pd.notna(row.get("ox_pred")):
+                ox_val = float(row["ox_pred"])
+                ox_color = "#22C55E" if ox_val < 30 else ("#FACC15" if ox_val < 60 else "#EF4444")
+                cards.append(metric_card(
+                    f'+{int(row["horizon_h"])} 小時預測 OX',
+                    f'<span style="color:{ox_color}">{ox_val:.1f}</span>',
+                    f'ppb · {"良好" if ox_val < 30 else ("普通" if ox_val < 60 else "警戒")}<br>目標時間 {html.escape(str(row["target_time"]))}',
+                ))
+                
     # --- 圖 1：實際 vs 預測 PM2.5 ---
     chart_html = '<div class="empty">還沒有足夠的觀測可以畫圖</div>'
     if not obs.empty:
