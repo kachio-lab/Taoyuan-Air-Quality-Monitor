@@ -205,6 +205,16 @@ def build_html(station: str) -> str:
         f'<span style="color:{status.get("latest_color", "#94A3B8")}">{fmt(latest_pm, 1)}</span>',
         f'µg/m³ · {html.escape(str(status.get("latest_band", "無資料")))}<br>觀測時間 {html.escape(str(status.get("latest_obs_time", "—")))}',
     )]
+    # OX 實測卡片
+    latest_ox = status.get("latest_ox")
+    if latest_ox is not None:
+        ox_color = "#22C55E" if latest_ox < 30 else ("#FACC15" if latest_ox < 60 else "#EF4444")
+        ox_level = "良好" if latest_ox < 30 else ("普通" if latest_ox < 60 else "警戒")
+        cards.append(metric_card(
+            "目前實測 OX",
+            f'<span style="color:{ox_color}">{latest_ox:.1f}</span>',
+            f'ppb · {ox_level}<br>觀測時間 {html.escape(str(status.get("latest_obs_time", "—")))}',
+        ))
     for f in status.get("forecasts", [])[:3]:
         cards.append(metric_card(
             f'+{f["horizon_h"]} 小時預測',
