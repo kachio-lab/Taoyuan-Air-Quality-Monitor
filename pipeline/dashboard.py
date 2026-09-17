@@ -170,7 +170,7 @@ def backtest_section() -> str:
         f'<p class="note">用 {bt["holdout_days"]} 天的保留期驗證（{period.get("test_start", "")} ~ '
         f'{period.get("test_end", "")}，共 {period.get("test_rows", 0)} 筆）。'
         '這段期間的資料完全沒有參與訓練，可以當作上線前的成效預期值。</p>'
-        f        f'<div class="metrics">{"".join(cards)}</div></section>'
+        f'<div class="metrics">{"".join(cards)}</div></section>'
     )    
 def band_legend() -> str:
     items = "".join(
