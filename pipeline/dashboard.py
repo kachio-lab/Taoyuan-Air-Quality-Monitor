@@ -170,7 +170,8 @@ def backtest_section() -> str:
         f'<p class="note">用 {bt["holdout_days"]} 天的保留期驗證（{period.get("test_start", "")} ~ '
         f'{period.get("test_end", "")}，共 {period.get("test_rows", 0)} 筆）。'
         '這段期間的資料完全沒有參與訓練，可以當作上線前的成效預期值。</p>'
-        f'<div class="metrics">{"".join(cards)}</div></section>'
+        f'    <div class="metrics">{"".join(pm25_cards)}</div>
+    <div class="metrics" style="margin-top:12px">{"".join(ox_cards)}</div>
     )
 
 
@@ -198,37 +199,38 @@ def build_html(station: str) -> str:
     if not obs.empty:
         obs = obs[obs["sitename"] == station].sort_values("publishtime")
 
-    # --- 現況卡片 ---
+    # PM2.5 卡片
     latest_pm = status.get("latest_pm25")
-    cards = [metric_card(
+    pm25_cards = [metric_card(
         "目前實測 PM2.5",
         f'<span style="color:{status.get("latest_color", "#94A3B8")}">{fmt(latest_pm, 1)}</span>',
         f'µg/m³ · {html.escape(str(status.get("latest_band", "無資料")))}<br>觀測時間 {html.escape(str(status.get("latest_obs_time", "—")))}',
     )]
-    # OX 實測卡片
-    latest_ox = status.get("latest_ox")
-    if latest_ox is not None:
-        ox_color = "#22C55E" if latest_ox < 30 else ("#FACC15" if latest_ox < 60 else "#EF4444")
-        ox_level = "良好" if latest_ox < 30 else ("普通" if latest_ox < 60 else "警戒")
-        cards.append(metric_card(
-            "目前實測 OX",
-            f'<span style="color:{ox_color}">{latest_ox:.1f}</span>',
-            f'ppb · {ox_level}<br>觀測時間 {html.escape(str(status.get("latest_obs_time", "—")))}',
-        ))
     for f in status.get("forecasts", [])[:3]:
-        cards.append(metric_card(
+        pm25_cards.append(metric_card(
             f'+{f["horizon_h"]} 小時預測',
             f'<span style="color:{f["color"]}">{f["y_pred"]:.1f}</span>',
             f'µg/m³ · {html.escape(f["band"])}<br>目標時間 {html.escape(f["target_time"])}',
         ))
-    # OX 預測卡片
+
+    # OX 卡片
+    ox_cards = []
+    latest_ox = status.get("latest_ox")
+    if latest_ox is not None:
+        ox_color = "#22C55E" if latest_ox < 30 else ("#FACC15" if latest_ox < 60 else "#EF4444")
+        ox_level = "良好" if latest_ox < 30 else ("普通" if latest_ox < 60 else "警戒")
+        ox_cards.append(metric_card(
+            "目前實測 OX",
+            f'<span style="color:{ox_color}">{latest_ox:.1f}</span>',
+            f'ppb · {ox_level}<br>觀測時間 {html.escape(str(status.get("latest_obs_time", "—")))}',
+        ))
     if not scores.empty and "ox_pred" in scores.columns:
         latest_scores = scores[scores["base_time"] == scores["base_time"].max()]
         for _, row in latest_scores.sort_values("horizon_h").iterrows():
             if pd.notna(row.get("ox_pred")):
                 ox_val = float(row["ox_pred"])
                 ox_color = "#22C55E" if ox_val < 30 else ("#FACC15" if ox_val < 60 else "#EF4444")
-                cards.append(metric_card(
+                ox_cards.append(metric_card(
                     f'+{int(row["horizon_h"])} 小時預測 OX',
                     f'<span style="color:{ox_color}">{ox_val:.1f}</span>',
                     f'ppb · {"良好" if ox_val < 30 else ("普通" if ox_val < 60 else "警戒")}<br>目標時間 {html.escape(str(row["target_time"]))}',
