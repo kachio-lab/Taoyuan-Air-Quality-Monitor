@@ -142,13 +142,6 @@ def summarise(scored: pd.DataFrame) -> dict:
             subset = grp if days is None else grp[grp["target_time"] >= now - pd.Timedelta(days=days)]
             per_window_pm25[label] = _metrics(subset)
             # OX 成效：暫時借用 _metrics，替換誤差欄位
-            ox_subset = subset.rename(columns={
-                "ox_error": "error",
-                "ox_abs_error": "abs_error",
-                "ox_baseline_error": "baseline_error",
-                "ox_baseline_abs_error": "baseline_abs_error",
-                "y_true_ox": "y_true",
-            }).copy()
             # band_hit 對 OX 不適用，補個假欄位讓 _metrics 不炸
             ox_subset = subset.drop(columns=["y_true"], errors="ignore").rename(columns={
                 "ox_error": "error",
