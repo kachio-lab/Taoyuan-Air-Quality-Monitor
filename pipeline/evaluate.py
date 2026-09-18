@@ -143,7 +143,8 @@ def summarise(scored: pd.DataFrame) -> dict:
             per_window_pm25[label] = _metrics(subset)
             # OX 成效：暫時借用 _metrics，替換誤差欄位
             # band_hit 對 OX 不適用，補個假欄位讓 _metrics 不炸
-            ox_subset = subset.drop(columns=["y_true"], errors="ignore").rename(columns={
+            drop_cols = ["y_true", "error", "abs_error", "baseline_error", "baseline_abs_error"]
+            ox_subset = subset.drop(columns=[c for c in drop_cols if c in subset.columns]).rename(columns={
                 "ox_error": "error",
                 "ox_abs_error": "abs_error",
                 "ox_baseline_error": "baseline_error",
