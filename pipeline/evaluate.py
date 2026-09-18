@@ -151,8 +151,8 @@ def summarise(scored: pd.DataFrame) -> dict:
             }).copy()
             # band_hit 對 OX 不適用，補個假欄位讓 _metrics 不炸
             if "band_hit" not in ox_subset.columns:
-                ox_subset["band_hit"] = np.nan
-            per_window_ox[label] = _metrics(ox_subset) if int(ox_subset["y_true"].notna().sum()) > 0 else None
+            ox_subset = ox_subset.drop(columns=["y_true"], errors="ignore")
+            per_window_ox[label] = _metrics(ox_subset) if ox_subset["y_true"].notna().sum() > 0 else None
 
         summary["horizons"][str(int(horizon))] = {
             "pm25": per_window_pm25,
