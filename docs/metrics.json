@@ -1,235 +1,30 @@
 {
-  "generated_at": "2026-09-24T18:06:19",
-  "pending": 52,
-  "warmup_excluded": 37,
+  "generated_at": "2026-09-24T18:30:31",
+  "pending": 2,
+  "warmup_excluded": 0,
   "warmup_only": false,
-  "horizons": {
-    "1": {
-      "pm25": {
-        "24h": {
-          "n": 23,
-          "mae": 1.979,
-          "rmse": 2.498,
-          "bias": -0.243,
-          "r2": 0.103,
-          "baseline_mae": 2.609,
-          "baseline_rmse": 3.162,
-          "skill_vs_baseline_pct": 24.1,
-          "band_hit_rate": 91.3,
-          "coverage_pct": 95.7
-        },
-        "7d": {
-          "n": 154,
-          "mae": 2.058,
-          "rmse": 2.613,
-          "bias": -0.44,
-          "r2": 0.24,
-          "baseline_mae": 2.455,
-          "baseline_rmse": 3.054,
-          "skill_vs_baseline_pct": 16.2,
-          "band_hit_rate": 87.0,
-          "coverage_pct": 93.5
-        },
-        "30d": {
-          "n": 154,
-          "mae": 2.058,
-          "rmse": 2.613,
-          "bias": -0.44,
-          "r2": 0.24,
-          "baseline_mae": 2.455,
-          "baseline_rmse": 3.054,
-          "skill_vs_baseline_pct": 16.2,
-          "band_hit_rate": 87.0,
-          "coverage_pct": 93.5
-        },
-        "all": {
-          "n": 154,
-          "mae": 2.058,
-          "rmse": 2.613,
-          "bias": -0.44,
-          "r2": 0.24,
-          "baseline_mae": 2.455,
-          "baseline_rmse": 3.054,
-          "skill_vs_baseline_pct": 16.2,
-          "band_hit_rate": 87.0,
-          "coverage_pct": 93.5
-        }
-      },
-      "ox": {
-        "24h": {
-          "n": 23,
-          "mae": 2.046,
-          "rmse": 2.753,
-          "bias": -0.057,
-          "r2": 0.927,
-          "baseline_mae": 3.304,
-          "baseline_rmse": 4.344,
-          "skill_vs_baseline_pct": 38.1,
-          "band_hit_rate": 91.3,
-          "coverage_pct": 91.3
-        },
-        "7d": {
-          "n": 153,
-          "mae": 2.508,
-          "rmse": 3.289,
-          "bias": -0.788,
-          "r2": 0.892,
-          "baseline_mae": NaN,
-          "baseline_rmse": NaN,
-          "skill_vs_baseline_pct": null,
-          "band_hit_rate": 86.9,
-          "coverage_pct": 91.5
-        },
-        "30d": {
-          "n": 153,
-          "mae": 2.508,
-          "rmse": 3.289,
-          "bias": -0.788,
-          "r2": 0.892,
-          "baseline_mae": NaN,
-          "baseline_rmse": NaN,
-          "skill_vs_baseline_pct": null,
-          "band_hit_rate": 86.9,
-          "coverage_pct": 91.5
-        },
-        "all": {
-          "n": 153,
-          "mae": 2.508,
-          "rmse": 3.289,
-          "bias": -0.788,
-          "r2": 0.892,
-          "baseline_mae": NaN,
-          "baseline_rmse": NaN,
-          "skill_vs_baseline_pct": null,
-          "band_hit_rate": 86.9,
-          "coverage_pct": 91.5
-        }
-      }
-    },
-    "3": {
-      "pm25": {
-        "24h": {
-          "n": 23,
-          "mae": 2.233,
-          "rmse": 2.823,
-          "bias": -0.426,
-          "r2": -0.146,
-          "baseline_mae": 2.696,
-          "baseline_rmse": 3.414,
-          "skill_vs_baseline_pct": 17.2,
-          "band_hit_rate": 91.3,
-          "coverage_pct": 87.0
-        },
-        "7d": {
-          "n": 153,
-          "mae": 2.439,
-          "rmse": 3.136,
-          "bias": -0.538,
-          "r2": -0.106,
-          "baseline_mae": 2.876,
-          "baseline_rmse": 3.703,
-          "skill_vs_baseline_pct": 15.2,
-          "band_hit_rate": 86.9,
-          "coverage_pct": 87.6
-        },
-        "30d": {
-          "n": 153,
-          "mae": 2.439,
-          "rmse": 3.136,
-          "bias": -0.538,
-          "r2": -0.106,
-          "baseline_mae": 2.876,
-          "baseline_rmse": 3.703,
-          "skill_vs_baseline_pct": 15.2,
-          "band_hit_rate": 86.9,
-          "coverage_pct": 87.6
-        },
-        "all": {
-          "n": 153,
-          "mae": 2.439,
-          "rmse": 3.136,
-          "bias": -0.538,
-          "r2": -0.106,
-          "baseline_mae": 2.876,
-          "baseline_rmse": 3.703,
-          "skill_vs_baseline_pct": 15.2,
-          "band_hit_rate": 86.9,
-          "coverage_pct": 87.6
-        }
-      },
-      "ox": {
-        "24h": {
-          "n": 23,
-          "mae": 5.019,
-          "rmse": 6.175,
-          "bias": -1.414,
-          "r2": 0.634,
-          "baseline_mae": 8.435,
-          "baseline_rmse": 10.823,
-          "skill_vs_baseline_pct": 40.5,
-          "band_hit_rate": 91.3,
-          "coverage_pct": 60.9
-        },
-        "7d": {
-          "n": 152,
-          "mae": 5.312,
-          "rmse": 6.448,
-          "bias": -3.138,
-          "r2": 0.587,
-          "baseline_mae": NaN,
-          "baseline_rmse": NaN,
-          "skill_vs_baseline_pct": null,
-          "band_hit_rate": 86.8,
-          "coverage_pct": 52.6
-        },
-        "30d": {
-          "n": 152,
-          "mae": 5.312,
-          "rmse": 6.448,
-          "bias": -3.138,
-          "r2": 0.587,
-          "baseline_mae": NaN,
-          "baseline_rmse": NaN,
-          "skill_vs_baseline_pct": null,
-          "band_hit_rate": 86.8,
-          "coverage_pct": 52.6
-        },
-        "all": {
-          "n": 152,
-          "mae": 5.312,
-          "rmse": 6.448,
-          "bias": -3.138,
-          "r2": 0.587,
-          "baseline_mae": NaN,
-          "baseline_rmse": NaN,
-          "skill_vs_baseline_pct": null,
-          "band_hit_rate": 86.8,
-          "coverage_pct": 52.6
-        }
-      }
-    }
-  },
+  "horizons": {},
   "status": {
     "station": "桃園",
-    "observation_rows": 198,
-    "observation_hours": 198,
-    "latest_obs_time": "2026-09-24 17:00:00",
-    "latest_pm25": 12.0,
+    "observation_rows": 199,
+    "observation_hours": 199,
+    "latest_obs_time": "2026-09-24 18:00:00",
+    "latest_pm25": 9.0,
     "latest_band": "良好",
     "latest_color": "#22C55E",
-    "latest_ox": 45.0,
+    "latest_ox": 41.0,
     "forecasts": [
       {
-        "target_time": "2026-09-24 18:00:00",
+        "target_time": "2026-09-24 19:00:00",
         "horizon_h": 1,
-        "y_pred": 12.5,
+        "y_pred": 10.45,
         "band": "良好",
         "color": "#22C55E"
       },
       {
-        "target_time": "2026-09-24 20:00:00",
+        "target_time": "2026-09-24 21:00:00",
         "horizon_h": 3,
-        "y_pred": 12.41,
+        "y_pred": 10.67,
         "band": "良好",
         "color": "#22C55E"
       }
