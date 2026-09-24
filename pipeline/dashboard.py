@@ -259,6 +259,7 @@ def build_html(station: str) -> str:
     # --- 圖 1b：實際 vs 預測 OX ---
     ox_chart_html = '<div class="empty">還沒有足夠的 OX 觀測可以畫圖</div>'
     if not obs.empty and "o3" in obs.columns and "no2" in obs.columns:
+        logger.info("OX圖觸發：obs筆數=%d o3有值=%d no2有值=%d", len(obs), obs['o3'].notna().sum(), obs['no2'].notna().sum())
         cutoff = obs["publishtime"].max() - pd.Timedelta(hours=CHART_HOURS)
         obs_ox = obs[obs["publishtime"] >= cutoff].copy()
         obs_ox["ox_actual"] = pd.to_numeric(obs_ox["o3"], errors="coerce") + pd.to_numeric(obs_ox["no2"], errors="coerce")
