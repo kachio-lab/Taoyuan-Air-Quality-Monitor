@@ -75,6 +75,7 @@ def predict_target(
     station: str,
     horizon: int,
     target: str,
+    persistence_override: float | None = None,
 ) -> tuple[float | None, float | None, str | None]:
     """對單一目標、單一時距做推論。回傳 (y_pred, persistence, algorithm)。"""
     safe_target = target.replace(".", "")
@@ -101,9 +102,11 @@ def predict_target(
 
     now_col = f"{target.replace('.', '')}_now" if target != "pm2.5" else "pm2.5_now"
     # ox_now / pm2.5_now 都已在 build_features 裡建立
-    persistence_col = "ox_now" if target == "ox" else "pm2.5_now"
-    persistence = float(latest.get(persistence_col, np.nan))
-
+    if persistence_override is not None:
+        persistence = persistence_override
+    else:
+        persistence_col = "ox_now" if target == "ox" else "pm2.5_now"
+        persistence = float(latest.get(persistence_col, np.nan))
     algorithm = type(model.named_steps["model"]).__name__
     return round(y_pred, 2), round(persistence, 2) if not np.isnan(persistence) else None, algorithm
 
@@ -140,7 +143,9 @@ def main(station: str = TARGET_STATION) -> pd.DataFrame:
         raise SystemExit("最新觀測的 pm2.5 全為缺值，無法預測")
     latest = valid.iloc[-1]
     base_time = latest["publishtime"]
-
+    # 直接從obs算最新OX實測值當persistence基準
+    obs_ox = feats[feats["ox"].notna()]
+    ox_persistence_val = float(obs_ox["ox"].iloc[-1]) if not obs_ox.empty else None
     history_hours = int(feats["pm2.5"].notna().sum())
     warmup = history_hours < MIN_HISTORY_HOURS
     if warmup:
@@ -158,7 +163,7 @@ def main(station: str = TARGET_STATION) -> pd.DataFrame:
 
     for horizon in HORIZONS:
         pm25_pred, pm25_pers, algo_pm25 = predict_target(feats, latest, station, horizon, "pm2.5")
-        ox_pred,   ox_pers,   algo_ox   = predict_target(feats, latest, station, horizon, "ox")
+        ox_pred,   ox_pers,   algo_ox   = predict_target(feats, latest, station, horizon, "ox", persistence_override=ox_persistence_val)
 
         if pm25_pred is None and ox_pred is None:
             continue   # 兩個模型都找不到，跳過
