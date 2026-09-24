@@ -264,6 +264,7 @@ def build_html(station: str) -> str:
         obs_ox = obs[obs["publishtime"] >= cutoff].copy()
         obs_ox["ox_actual"] = pd.to_numeric(obs_ox["o3"], errors="coerce") + pd.to_numeric(obs_ox["no2"], errors="coerce")
         obs_ox = obs_ox.dropna(subset=["ox_actual"])
+        logger.info("obs_ox筆數（dropna後）：%d", len(obs_ox))
         ox_series: dict = {
             "實際 OX": (obs_ox["publishtime"].tolist(), obs_ox["ox_actual"].astype(float).tolist(), "#0891B2"),
         }
