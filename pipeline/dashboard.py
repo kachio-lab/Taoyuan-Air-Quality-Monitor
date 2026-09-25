@@ -277,6 +277,8 @@ def build_html(station: str) -> str:
                         sel["ox_pred"].astype(float).tolist(),
                         color,
                     )
+        logger.info("ox_series實際OX樣本數：%d 最大值：%s 最小值：%s", 
+           len(obs_ox), obs_ox["ox_actual"].max(), obs_ox["ox_actual"].min())
         if len(obs_ox) >= 2:
             ox_chart_html = line_chart(ox_series, f"{station}測站 OX：近 {CHART_HOURS} 小時實際值 vs 預測值")
 
