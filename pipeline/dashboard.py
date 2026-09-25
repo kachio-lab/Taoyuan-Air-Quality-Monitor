@@ -40,6 +40,7 @@ def line_chart(series: dict[str, tuple[list[datetime], list[float], str]], title
     """series: {圖例名稱: (x 時間陣列, y 值陣列, 色碼)}"""
     points = [(x, y) for xs, ys, _ in series.values() for x, y in zip(xs, ys) if y == y]
     if len(points) < 2:
+        logger.info("line_chart points數：%d title：%s", len(points), title[:20])
         return f'<div class="empty">{html.escape(title)}：資料還不夠，累積幾小時後就會出現</div>'
 
     xs_all = [p[0] for p in points]
