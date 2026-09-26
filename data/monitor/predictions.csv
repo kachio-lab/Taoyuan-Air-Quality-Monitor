@@ -103,5 +103,7 @@
 2026-09-26 19:27:55,桃園,2026-09-26 19:00:00,3,2026-09-26 22:00:00,,,,False,17.54,18.0,39.98,57.0,RandomForestRegressor,HistGradientBoostingRegressor
 2026-09-26 22:29:06,桃園,2026-09-26 22:00:00,1,2026-09-26 23:00:00,,,,False,29.89,32.0,43.83,48.0,RandomForestRegressor,HistGradientBoostingRegressor
 2026-09-26 20:33:37,桃園,2026-09-26 20:00:00,3,2026-09-26 23:00:00,,,,False,24.55,33.0,35.75,53.0,RandomForestRegressor,HistGradientBoostingRegressor
+2026-09-26 23:29:09,桃園,2026-09-26 23:00:00,1,2026-09-27 00:00:00,,,,False,28.11,29.0,42.6,46.0,RandomForestRegressor,HistGradientBoostingRegressor
 2026-09-26 21:27:31,桃園,2026-09-26 21:00:00,3,2026-09-27 00:00:00,,,,False,22.34,27.0,37.0,53.0,RandomForestRegressor,HistGradientBoostingRegressor
 2026-09-26 22:29:06,桃園,2026-09-26 22:00:00,3,2026-09-27 01:00:00,,,,False,25.0,32.0,36.53,48.0,RandomForestRegressor,HistGradientBoostingRegressor
+2026-09-26 23:29:09,桃園,2026-09-26 23:00:00,3,2026-09-27 02:00:00,,,,False,23.58,29.0,35.02,46.0,RandomForestRegressor,HistGradientBoostingRegressor
