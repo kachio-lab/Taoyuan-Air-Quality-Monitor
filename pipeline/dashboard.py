@@ -299,7 +299,20 @@ def build_html(station: str) -> str:
                 },
                 "PM2.5 逐筆預測誤差（預測值 − 實際值，越接近 0 越好）",
             )
-
+    # --- 圖 3：預測誤差 OX ---
+    ox_err_chart = ""
+    if not scores.empty and "ox_error" in scores.columns and "y_true_ox" in scores.columns:
+        ox_graded = scores.dropna(subset=["y_true_ox"])
+        if len(ox_graded) >= 2:
+            ox_h1 = ox_graded[ox_graded["horizon_h"] == 1]
+            if len(ox_h1) >= 2:
+                ox_err_chart = line_chart(
+                    {
+                        "+1h OX 模型誤差": (ox_h1["target_time"].tolist(), ox_h1["ox_error"].astype(float).tolist(), "#0891B2"),
+                        "OX 基準線誤差": (ox_h1["target_time"].tolist(), ox_h1["ox_baseline_error"].astype(float).tolist(), "#94A3B8"),
+                    },
+                    "OX 逐筆預測誤差（預測值 − 實際值，越接近 0 越好）",
+                )
     # --- 最近 20 筆 PM2.5 對照表 ---
     recent_rows = ""
     if not graded.empty:
@@ -464,6 +477,7 @@ def build_html(station: str) -> str:
     <h2>即時監控成效（OX）</h2>
     <p class="note">OX = O₃ + NO₂（總氧化劑），單位 ppb。</p>
     <div class="table-scroll">{performance_table(metrics.get("horizons", {}), metrics.get("warmup_only", False), "ox")}</div>
+    {ox_err_chart}
   </section>
 
   {backtest_section()}
