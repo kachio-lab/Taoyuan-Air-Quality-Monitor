@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T02:38:16",
+  "generated_at": "2026-10-02T03:32:30",
   "pending": 6,
   "warmup_excluded": 0,
   "warmup_only": false,
@@ -8,101 +8,101 @@
       "pm25": {
         "24h": {
           "n": 24,
-          "mae": 4.087,
-          "rmse": 5.005,
-          "bias": -1.182,
-          "r2": 0.383,
-          "baseline_mae": 4.5,
-          "baseline_rmse": 5.583,
-          "skill_vs_baseline_pct": 9.2,
+          "mae": 4.025,
+          "rmse": 4.957,
+          "bias": -1.244,
+          "r2": 0.498,
+          "baseline_mae": 4.292,
+          "baseline_rmse": 5.374,
+          "skill_vs_baseline_pct": 6.2,
           "band_hit_rate": 83.3,
           "coverage_pct": 75.0
         },
         "7d": {
           "n": 166,
-          "mae": 2.995,
-          "rmse": 3.866,
-          "bias": -0.833,
+          "mae": 2.982,
+          "rmse": 3.852,
+          "bias": -0.846,
           "r2": 0.688,
-          "baseline_mae": 3.584,
-          "baseline_rmse": 4.42,
-          "skill_vs_baseline_pct": 16.5,
+          "baseline_mae": 3.578,
+          "baseline_rmse": 4.415,
+          "skill_vs_baseline_pct": 16.7,
           "band_hit_rate": 76.5,
-          "coverage_pct": 84.3
+          "coverage_pct": 84.9
         },
         "30d": {
-          "n": 174,
-          "mae": 2.966,
-          "rmse": 3.828,
-          "bias": -0.837,
-          "r2": 0.688,
-          "baseline_mae": 3.523,
-          "baseline_rmse": 4.375,
-          "skill_vs_baseline_pct": 15.8,
-          "band_hit_rate": 76.4,
-          "coverage_pct": 84.5
+          "n": 175,
+          "mae": 2.967,
+          "rmse": 3.824,
+          "bias": -0.814,
+          "r2": 0.689,
+          "baseline_mae": 3.52,
+          "baseline_rmse": 4.369,
+          "skill_vs_baseline_pct": 15.7,
+          "band_hit_rate": 76.6,
+          "coverage_pct": 84.6
         },
         "all": {
-          "n": 174,
-          "mae": 2.966,
-          "rmse": 3.828,
-          "bias": -0.837,
-          "r2": 0.688,
-          "baseline_mae": 3.523,
-          "baseline_rmse": 4.375,
-          "skill_vs_baseline_pct": 15.8,
-          "band_hit_rate": 76.4,
-          "coverage_pct": 84.5
+          "n": 175,
+          "mae": 2.967,
+          "rmse": 3.824,
+          "bias": -0.814,
+          "r2": 0.689,
+          "baseline_mae": 3.52,
+          "baseline_rmse": 4.369,
+          "skill_vs_baseline_pct": 15.7,
+          "band_hit_rate": 76.6,
+          "coverage_pct": 84.6
         }
       },
       "ox": {
         "24h": {
           "n": 24,
-          "mae": 5.098,
-          "rmse": 6.368,
-          "bias": -2.698,
-          "r2": 0.907,
-          "baseline_mae": 6.708,
-          "baseline_rmse": 8.463,
-          "skill_vs_baseline_pct": 24.0,
+          "mae": 5.148,
+          "rmse": 6.386,
+          "bias": -2.649,
+          "r2": 0.906,
+          "baseline_mae": 6.792,
+          "baseline_rmse": 8.522,
+          "skill_vs_baseline_pct": 24.2,
           "band_hit_rate": 83.3,
           "coverage_pct": 50.0
         },
         "7d": {
           "n": 159,
-          "mae": 3.573,
-          "rmse": 4.765,
-          "bias": -1.115,
-          "r2": 0.933,
-          "baseline_mae": 5.044,
-          "baseline_rmse": 6.83,
-          "skill_vs_baseline_pct": 29.2,
+          "mae": 3.565,
+          "rmse": 4.759,
+          "bias": -1.123,
+          "r2": 0.932,
+          "baseline_mae": 5.05,
+          "baseline_rmse": 6.836,
+          "skill_vs_baseline_pct": 29.4,
           "band_hit_rate": 75.5,
           "coverage_pct": 74.2
         },
         "30d": {
-          "n": 167,
-          "mae": 3.466,
-          "rmse": 4.662,
-          "bias": -1.093,
+          "n": 168,
+          "mae": 3.463,
+          "rmse": 4.654,
+          "bias": -1.068,
           "r2": 0.934,
-          "baseline_mae": 4.85,
-          "baseline_rmse": 6.675,
-          "skill_vs_baseline_pct": 28.5,
-          "band_hit_rate": 75.4,
-          "coverage_pct": 75.4
+          "baseline_mae": 4.863,
+          "baseline_rmse": 6.677,
+          "skill_vs_baseline_pct": 28.8,
+          "band_hit_rate": 75.6,
+          "coverage_pct": 75.6
         },
         "all": {
-          "n": 167,
-          "mae": 3.466,
-          "rmse": 4.662,
-          "bias": -1.093,
+          "n": 168,
+          "mae": 3.463,
+          "rmse": 4.654,
+          "bias": -1.068,
           "r2": 0.934,
-          "baseline_mae": 4.85,
-          "baseline_rmse": 6.675,
-          "skill_vs_baseline_pct": 28.5,
-          "band_hit_rate": 75.4,
-          "coverage_pct": 75.4
+          "baseline_mae": 4.863,
+          "baseline_rmse": 6.677,
+          "skill_vs_baseline_pct": 28.8,
+          "band_hit_rate": 75.6,
+          "coverage_pct": 75.6
         }
       }
     },
@@ -110,126 +110,126 @@
       "pm25": {
         "24h": {
           "n": 24,
-          "mae": 5.431,
-          "rmse": 7.271,
-          "bias": -3.882,
-          "r2": -0.303,
-          "baseline_mae": 6.417,
-          "baseline_rmse": 7.577,
-          "skill_vs_baseline_pct": 15.4,
-          "band_hit_rate": 79.2,
-          "coverage_pct": 58.3
+          "mae": 5.645,
+          "rmse": 7.363,
+          "bias": -3.668,
+          "r2": -0.106,
+          "baseline_mae": 6.667,
+          "baseline_rmse": 7.741,
+          "skill_vs_baseline_pct": 15.3,
+          "band_hit_rate": 75.0,
+          "coverage_pct": 54.2
         },
         "7d": {
           "n": 166,
-          "mae": 4.03,
-          "rmse": 5.301,
-          "bias": -1.9,
-          "r2": 0.419,
-          "baseline_mae": 4.518,
-          "baseline_rmse": 5.784,
+          "mae": 4.044,
+          "rmse": 5.313,
+          "bias": -1.886,
+          "r2": 0.413,
+          "baseline_mae": 4.536,
+          "baseline_rmse": 5.805,
           "skill_vs_baseline_pct": 10.8,
-          "band_hit_rate": 71.7,
-          "coverage_pct": 70.5
+          "band_hit_rate": 71.1,
+          "coverage_pct": 69.9
         },
         "30d": {
-          "n": 172,
-          "mae": 3.925,
-          "rmse": 5.213,
-          "bias": -1.824,
+          "n": 173,
+          "mae": 3.935,
+          "rmse": 5.216,
+          "bias": -1.78,
           "r2": 0.434,
-          "baseline_mae": 4.442,
-          "baseline_rmse": 5.705,
-          "skill_vs_baseline_pct": 11.6,
-          "band_hit_rate": 72.7,
-          "coverage_pct": 71.5
+          "baseline_mae": 4.462,
+          "baseline_rmse": 5.721,
+          "skill_vs_baseline_pct": 11.8,
+          "band_hit_rate": 72.3,
+          "coverage_pct": 71.1
         },
         "all": {
-          "n": 172,
-          "mae": 3.925,
-          "rmse": 5.213,
-          "bias": -1.824,
+          "n": 173,
+          "mae": 3.935,
+          "rmse": 5.216,
+          "bias": -1.78,
           "r2": 0.434,
-          "baseline_mae": 4.442,
-          "baseline_rmse": 5.705,
-          "skill_vs_baseline_pct": 11.6,
-          "band_hit_rate": 72.7,
-          "coverage_pct": 71.5
+          "baseline_mae": 4.462,
+          "baseline_rmse": 5.721,
+          "skill_vs_baseline_pct": 11.8,
+          "band_hit_rate": 72.3,
+          "coverage_pct": 71.1
         }
       },
       "ox": {
         "24h": {
           "n": 24,
-          "mae": 9.047,
-          "rmse": 11.244,
-          "bias": -6.355,
-          "r2": 0.709,
-          "baseline_mae": 16.667,
-          "baseline_rmse": 20.532,
-          "skill_vs_baseline_pct": 45.7,
-          "band_hit_rate": 79.2,
+          "mae": 9.505,
+          "rmse": 11.723,
+          "bias": -5.898,
+          "r2": 0.683,
+          "baseline_mae": 17.0,
+          "baseline_rmse": 20.839,
+          "skill_vs_baseline_pct": 44.1,
+          "band_hit_rate": 75.0,
           "coverage_pct": 29.2
         },
         "7d": {
           "n": 158,
-          "mae": 7.88,
-          "rmse": 10.016,
-          "bias": -4.36,
-          "r2": 0.704,
-          "baseline_mae": 12.095,
-          "baseline_rmse": 15.72,
-          "skill_vs_baseline_pct": 34.8,
-          "band_hit_rate": 70.9,
+          "mae": 7.954,
+          "rmse": 10.102,
+          "bias": -4.286,
+          "r2": 0.696,
+          "baseline_mae": 12.177,
+          "baseline_rmse": 15.807,
+          "skill_vs_baseline_pct": 34.7,
+          "band_hit_rate": 70.3,
           "coverage_pct": 38.6
         },
         "30d": {
-          "n": 164,
-          "mae": 7.708,
-          "rmse": 9.852,
-          "bias": -4.294,
-          "r2": 0.708,
-          "baseline_mae": 11.744,
-          "baseline_rmse": 15.44,
-          "skill_vs_baseline_pct": 34.4,
-          "band_hit_rate": 72.0,
-          "coverage_pct": 40.2
+          "n": 165,
+          "mae": 7.768,
+          "rmse": 9.916,
+          "bias": -4.162,
+          "r2": 0.703,
+          "baseline_mae": 11.812,
+          "baseline_rmse": 15.497,
+          "skill_vs_baseline_pct": 34.2,
+          "band_hit_rate": 71.5,
+          "coverage_pct": 40.0
         },
         "all": {
-          "n": 164,
-          "mae": 7.708,
-          "rmse": 9.852,
-          "bias": -4.294,
-          "r2": 0.708,
-          "baseline_mae": 11.744,
-          "baseline_rmse": 15.44,
-          "skill_vs_baseline_pct": 34.4,
-          "band_hit_rate": 72.0,
-          "coverage_pct": 40.2
+          "n": 165,
+          "mae": 7.768,
+          "rmse": 9.916,
+          "bias": -4.162,
+          "r2": 0.703,
+          "baseline_mae": 11.812,
+          "baseline_rmse": 15.497,
+          "skill_vs_baseline_pct": 34.2,
+          "band_hit_rate": 71.5,
+          "coverage_pct": 40.0
         }
       }
     }
   },
   "status": {
     "station": "桃園",
-    "observation_rows": 375,
-    "observation_hours": 374,
-    "latest_obs_time": "2026-10-02 02:00:00",
-    "latest_pm25": 13.0,
+    "observation_rows": 376,
+    "observation_hours": 375,
+    "latest_obs_time": "2026-10-02 03:00:00",
+    "latest_pm25": 10.0,
     "latest_band": "良好",
     "latest_color": "#22C55E",
-    "latest_ox": 49.0,
+    "latest_ox": 42.0,
     "forecasts": [
       {
-        "target_time": "2026-10-02 03:00:00",
+        "target_time": "2026-10-02 04:00:00",
         "horizon_h": 1,
-        "y_pred": 13.14,
+        "y_pred": 9.73,
         "band": "良好",
         "color": "#22C55E"
       },
       {
-        "target_time": "2026-10-02 05:00:00",
+        "target_time": "2026-10-02 06:00:00",
         "horizon_h": 3,
-        "y_pred": 12.88,
+        "y_pred": 12.41,
         "band": "良好",
         "color": "#22C55E"
       }
@@ -245,32 +245,32 @@
           "model_file": "pm25_桃園_h1.joblib",
           "best_algorithm": "RandomForest",
           "feature_count": 43,
-          "train_rows": 13511,
+          "train_rows": 13876,
           "train_start": "2025-01-01 01:00:00",
-          "train_end": "2026-07-31 22:00:00",
+          "train_end": "2026-10-02 01:00:00",
           "cv": {
-            "cv_rmse": 3.558919603725409,
-            "cv_mae": 2.654854955184155,
-            "cv_r2": 0.7567647307832666,
+            "cv_rmse": 3.553559746983537,
+            "cv_mae": 2.6555898723826408,
+            "cv_r2": 0.753456398449482,
             "cv_rmse_folds": [
-              4.0034,
-              3.2524,
-              3.3338,
-              4.1241,
-              3.0809
+              3.9635,
+              3.1843,
+              3.3818,
+              4.1227,
+              3.1155
             ]
           },
           "cv_all": {
-            "HistGradientBoosting": 3.6485,
-            "RandomForest": 3.5589,
-            "Ridge": 3.8701,
-            "LightGBM": 3.65
+            "HistGradientBoosting": 3.6526,
+            "RandomForest": 3.5536,
+            "Ridge": 3.6918,
+            "LightGBM": 3.6466
           },
           "persistence_baseline": {
-            "rmse": 3.943708846931972,
-            "mae": 2.7574899388880607
+            "rmse": 3.9390705380796938,
+            "mae": 2.762607179189071
           },
-          "trained_at": "2026-09-14T17:44:08"
+          "trained_at": "2026-10-02T02:45:23"
         },
         "pm2.5_h3": {
           "station": "桃園",
@@ -279,32 +279,32 @@
           "model_file": "pm25_桃園_h3.joblib",
           "best_algorithm": "RandomForest",
           "feature_count": 43,
-          "train_rows": 13497,
+          "train_rows": 13858,
           "train_start": "2025-01-01 01:00:00",
-          "train_end": "2026-07-31 20:00:00",
+          "train_end": "2026-10-01 23:00:00",
           "cv": {
-            "cv_rmse": 4.899501192867291,
-            "cv_mae": 3.749958443812963,
-            "cv_r2": 0.5409196104827896,
+            "cv_rmse": 4.8962950862565915,
+            "cv_mae": 3.761974841843832,
+            "cv_r2": 0.5325020571118442,
             "cv_rmse_folds": [
-              5.773,
-              4.5161,
-              4.4769,
-              5.6471,
-              4.0843
+              5.7271,
+              4.5046,
+              4.5624,
+              5.6359,
+              4.0516
             ]
           },
           "cv_all": {
-            "HistGradientBoosting": 5.2374,
-            "RandomForest": 4.8995,
-            "Ridge": 5.3191,
-            "LightGBM": 5.2135
+            "HistGradientBoosting": 5.3245,
+            "RandomForest": 4.8963,
+            "Ridge": 5.0885,
+            "LightGBM": 5.2806
           },
           "persistence_baseline": {
-            "rmse": 5.559050098135531,
-            "mae": 3.9708890050011196
+            "rmse": 5.542271285325682,
+            "mae": 3.964114135973213
           },
-          "trained_at": "2026-09-14T17:44:48"
+          "trained_at": "2026-10-02T02:45:45"
         },
         "ox_h1": {
           "station": "桃園",
@@ -313,32 +313,32 @@
           "model_file": "ox_桃園_h1.joblib",
           "best_algorithm": "HistGradientBoosting",
           "feature_count": 43,
-          "train_rows": 13229,
+          "train_rows": 13585,
           "train_start": "2025-01-01 01:00:00",
-          "train_end": "2026-07-31 22:00:00",
+          "train_end": "2026-10-02 01:00:00",
           "cv": {
-            "cv_rmse": 4.541659858189993,
-            "cv_mae": 3.1333722640297474,
-            "cv_r2": 0.899244925648989,
+            "cv_rmse": 4.541280548524404,
+            "cv_mae": 3.1164849791775238,
+            "cv_r2": 0.8935453727496686,
             "cv_rmse_folds": [
-              5.9137,
-              6.0024,
-              2.8204,
-              3.2417,
-              4.7301
+              5.8943,
+              5.8536,
+              2.7966,
+              3.3406,
+              4.8213
             ]
           },
           "cv_all": {
-            "HistGradientBoosting": 4.5417,
-            "RandomForest": 4.6105,
-            "Ridge": 4.6961,
-            "LightGBM": 4.5173
+            "HistGradientBoosting": 4.5413,
+            "RandomForest": 4.6614,
+            "Ridge": 4.7928,
+            "LightGBM": 4.5155
           },
           "persistence_baseline": {
-            "rmse": 4.70153382546824,
-            "mae": 2.981401040073417
+            "rmse": 4.715271818202486,
+            "mae": 3.0011039009472666
           },
-          "trained_at": "2026-09-14T17:45:23"
+          "trained_at": "2026-10-02T02:46:02"
         },
         "ox_h3": {
           "station": "桃園",
@@ -347,32 +347,32 @@
           "model_file": "ox_桃園_h3.joblib",
           "best_algorithm": "HistGradientBoosting",
           "feature_count": 43,
-          "train_rows": 13200,
+          "train_rows": 13552,
           "train_start": "2025-01-01 01:00:00",
-          "train_end": "2026-07-31 20:00:00",
+          "train_end": "2026-10-01 23:00:00",
           "cv": {
-            "cv_rmse": 8.188066039777087,
-            "cv_mae": 5.972411336886393,
-            "cv_r2": 0.6596290366202859,
+            "cv_rmse": 8.081697290575102,
+            "cv_mae": 5.840649522511123,
+            "cv_r2": 0.6468144104550555,
             "cv_rmse_folds": [
-              10.6178,
-              10.0216,
-              6.3096,
-              5.6038,
-              8.3876
+              10.3567,
+              10.0106,
+              5.7141,
+              5.8676,
+              8.4596
             ]
           },
           "cv_all": {
-            "HistGradientBoosting": 8.1881,
-            "RandomForest": 8.1322,
-            "Ridge": 9.0803,
-            "LightGBM": 8.1809
+            "HistGradientBoosting": 8.0817,
+            "RandomForest": 8.1765,
+            "Ridge": 9.3019,
+            "LightGBM": 8.106
           },
           "persistence_baseline": {
-            "rmse": 10.351684938342762,
-            "mae": 6.817384924312635
+            "rmse": 10.407951548496332,
+            "mae": 6.874670383485271
           },
-          "trained_at": "2026-09-14T17:46:03"
+          "trained_at": "2026-10-02T02:46:19"
         }
       }
     }
