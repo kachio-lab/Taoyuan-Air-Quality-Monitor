@@ -1,34 +1,34 @@
 {
-  "generated_at": "2026-10-04T07:07:01",
-  "pending": 13,
+  "generated_at": "2026-10-04T10:42:57",
+  "pending": 15,
   "warmup_excluded": 0,
   "warmup_only": false,
   "horizons": {
     "1": {
       "pm25": {
         "24h": {
-          "n": 7,
-          "mae": 1.11,
-          "rmse": 1.311,
-          "bias": 0.77,
-          "r2": 0.493,
-          "baseline_mae": 1.286,
-          "baseline_rmse": 1.464,
-          "skill_vs_baseline_pct": 13.7,
+          "n": 4,
+          "mae": 0.998,
+          "rmse": 1.288,
+          "bias": 0.917,
+          "r2": -1.415,
+          "baseline_mae": 1.0,
+          "baseline_rmse": 1.225,
+          "skill_vs_baseline_pct": 0.2,
           "band_hit_rate": 100.0,
           "coverage_pct": 100.0
         },
         "7d": {
-          "n": 149,
-          "mae": 2.632,
-          "rmse": 3.396,
-          "bias": -0.328,
+          "n": 146,
+          "mae": 2.653,
+          "rmse": 3.419,
+          "bias": -0.368,
           "r2": 0.768,
-          "baseline_mae": 2.987,
-          "baseline_rmse": 3.824,
-          "skill_vs_baseline_pct": 11.9,
-          "band_hit_rate": 82.6,
-          "coverage_pct": 89.9
+          "baseline_mae": 2.979,
+          "baseline_rmse": 3.831,
+          "skill_vs_baseline_pct": 11.0,
+          "band_hit_rate": 82.2,
+          "coverage_pct": 89.7
         },
         "30d": {
           "n": 210,
@@ -57,28 +57,28 @@
       },
       "ox": {
         "24h": {
-          "n": 6,
-          "mae": 1.703,
-          "rmse": 2.272,
-          "bias": -1.52,
-          "r2": 0.128,
-          "baseline_mae": 2.167,
-          "baseline_rmse": 2.614,
-          "skill_vs_baseline_pct": 21.4,
+          "n": 4,
+          "mae": 1.503,
+          "rmse": 2.035,
+          "bias": -1.448,
+          "r2": -1.07,
+          "baseline_mae": 2.0,
+          "baseline_rmse": 2.449,
+          "skill_vs_baseline_pct": 24.9,
           "band_hit_rate": 100.0,
           "coverage_pct": 100.0
         },
         "7d": {
-          "n": 141,
-          "mae": 3.841,
-          "rmse": 5.032,
-          "bias": -1.573,
+          "n": 138,
+          "mae": 3.863,
+          "rmse": 5.062,
+          "bias": -1.62,
           "r2": 0.903,
-          "baseline_mae": 4.652,
-          "baseline_rmse": 6.236,
-          "skill_vs_baseline_pct": 17.4,
-          "band_hit_rate": 81.6,
-          "coverage_pct": 73.0
+          "baseline_mae": 4.638,
+          "baseline_rmse": 6.229,
+          "skill_vs_baseline_pct": 16.7,
+          "band_hit_rate": 81.2,
+          "coverage_pct": 72.5
         },
         "30d": {
           "n": 200,
@@ -109,28 +109,28 @@
     "3": {
       "pm25": {
         "24h": {
-          "n": 8,
-          "mae": 1.851,
-          "rmse": 2.103,
-          "bias": 1.221,
-          "r2": -0.483,
+          "n": 5,
+          "mae": 1.93,
+          "rmse": 2.239,
+          "bias": 1.93,
+          "r2": -6.835,
           "baseline_mae": 2.0,
-          "baseline_rmse": 2.449,
-          "skill_vs_baseline_pct": 7.4,
+          "baseline_rmse": 2.608,
+          "skill_vs_baseline_pct": 3.5,
           "band_hit_rate": 100.0,
           "coverage_pct": 100.0
         },
         "7d": {
-          "n": 150,
-          "mae": 3.56,
-          "rmse": 4.736,
-          "bias": -0.907,
-          "r2": 0.551,
-          "baseline_mae": 4.027,
-          "baseline_rmse": 5.165,
-          "skill_vs_baseline_pct": 11.6,
-          "band_hit_rate": 79.3,
-          "coverage_pct": 76.0
+          "n": 147,
+          "mae": 3.544,
+          "rmse": 4.734,
+          "bias": -0.957,
+          "r2": 0.559,
+          "baseline_mae": 4.0,
+          "baseline_rmse": 5.139,
+          "skill_vs_baseline_pct": 11.4,
+          "band_hit_rate": 79.6,
+          "coverage_pct": 76.2
         },
         "30d": {
           "n": 209,
@@ -159,28 +159,28 @@
       },
       "ox": {
         "24h": {
-          "n": 7,
-          "mae": 4.989,
-          "rmse": 6.457,
-          "bias": 1.171,
-          "r2": 0.508,
-          "baseline_mae": 5.286,
-          "baseline_rmse": 7.081,
-          "skill_vs_baseline_pct": 5.6,
+          "n": 5,
+          "mae": 4.302,
+          "rmse": 6.204,
+          "bias": 0.77,
+          "r2": 0.675,
+          "baseline_mae": 6.0,
+          "baseline_rmse": 8.075,
+          "skill_vs_baseline_pct": 28.3,
           "band_hit_rate": 100.0,
-          "coverage_pct": 57.1
+          "coverage_pct": 60.0
         },
         "7d": {
-          "n": 141,
-          "mae": 7.775,
-          "rmse": 9.922,
-          "bias": -4.085,
-          "r2": 0.628,
-          "baseline_mae": 10.44,
-          "baseline_rmse": 14.008,
-          "skill_vs_baseline_pct": 25.5,
-          "band_hit_rate": 78.0,
-          "coverage_pct": 39.7
+          "n": 138,
+          "mae": 7.84,
+          "rmse": 9.991,
+          "bias": -4.277,
+          "r2": 0.626,
+          "baseline_mae": 10.457,
+          "baseline_rmse": 14.062,
+          "skill_vs_baseline_pct": 25.0,
+          "band_hit_rate": 78.3,
+          "coverage_pct": 39.1
         },
         "30d": {
           "n": 198,
@@ -211,25 +211,25 @@
   },
   "status": {
     "station": "桃園",
-    "observation_rows": 415,
-    "observation_hours": 414,
-    "latest_obs_time": "2026-10-04 06:00:00",
-    "latest_pm25": 10.0,
+    "observation_rows": 416,
+    "observation_hours": 415,
+    "latest_obs_time": "2026-10-04 10:00:00",
+    "latest_pm25": 12.0,
     "latest_band": "良好",
     "latest_color": "#22C55E",
-    "latest_ox": 30.0,
+    "latest_ox": 53.0,
     "forecasts": [
       {
-        "target_time": "2026-10-04 07:00:00",
+        "target_time": "2026-10-04 11:00:00",
         "horizon_h": 1,
-        "y_pred": 10.29,
+        "y_pred": 13.07,
         "band": "良好",
         "color": "#22C55E"
       },
       {
-        "target_time": "2026-10-04 09:00:00",
+        "target_time": "2026-10-04 13:00:00",
         "horizon_h": 3,
-        "y_pred": 11.22,
+        "y_pred": 12.81,
         "band": "良好",
         "color": "#22C55E"
       }
