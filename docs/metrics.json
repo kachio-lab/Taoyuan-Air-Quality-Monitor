@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-06T23:15:22",
-  "pending": 35,
+  "generated_at": "2026-10-07T04:22:15",
+  "pending": 37,
   "warmup_excluded": 0,
   "warmup_only": false,
   "horizons": {
@@ -8,16 +8,16 @@
       "pm25": {
         "24h": null,
         "7d": {
-          "n": 87,
-          "mae": 2.81,
-          "rmse": 3.685,
-          "bias": -0.633,
-          "r2": 0.769,
-          "baseline_mae": 3.08,
-          "baseline_rmse": 4.017,
-          "skill_vs_baseline_pct": 8.8,
-          "band_hit_rate": 80.5,
-          "coverage_pct": 87.4
+          "n": 82,
+          "mae": 2.789,
+          "rmse": 3.704,
+          "bias": -0.563,
+          "r2": 0.778,
+          "baseline_mae": 3.049,
+          "baseline_rmse": 4.003,
+          "skill_vs_baseline_pct": 8.5,
+          "band_hit_rate": 84.1,
+          "coverage_pct": 86.6
         },
         "30d": {
           "n": 210,
@@ -47,16 +47,16 @@
       "ox": {
         "24h": null,
         "7d": {
-          "n": 84,
-          "mae": 4.362,
-          "rmse": 5.715,
-          "bias": -2.437,
-          "r2": 0.877,
-          "baseline_mae": 4.976,
-          "baseline_rmse": 6.796,
-          "skill_vs_baseline_pct": 12.4,
-          "band_hit_rate": 79.8,
-          "coverage_pct": 67.9
+          "n": 79,
+          "mae": 4.516,
+          "rmse": 5.857,
+          "bias": -2.538,
+          "r2": 0.869,
+          "baseline_mae": 5.139,
+          "baseline_rmse": 6.965,
+          "skill_vs_baseline_pct": 12.1,
+          "band_hit_rate": 83.5,
+          "coverage_pct": 65.8
         },
         "30d": {
           "n": 200,
@@ -88,16 +88,16 @@
       "pm25": {
         "24h": null,
         "7d": {
-          "n": 88,
-          "mae": 3.722,
-          "rmse": 5.119,
-          "bias": -1.681,
-          "r2": 0.553,
-          "baseline_mae": 4.216,
-          "baseline_rmse": 5.403,
-          "skill_vs_baseline_pct": 11.7,
-          "band_hit_rate": 76.1,
-          "coverage_pct": 73.9
+          "n": 83,
+          "mae": 3.754,
+          "rmse": 5.183,
+          "bias": -1.725,
+          "r2": 0.564,
+          "baseline_mae": 4.217,
+          "baseline_rmse": 5.446,
+          "skill_vs_baseline_pct": 11.0,
+          "band_hit_rate": 79.5,
+          "coverage_pct": 73.5
         },
         "30d": {
           "n": 209,
@@ -127,16 +127,16 @@
       "ox": {
         "24h": null,
         "7d": {
-          "n": 85,
-          "mae": 8.102,
-          "rmse": 10.272,
-          "bias": -5.258,
-          "r2": 0.611,
-          "baseline_mae": 11.047,
-          "baseline_rmse": 15.68,
-          "skill_vs_baseline_pct": 26.7,
-          "band_hit_rate": 75.3,
-          "coverage_pct": 36.5
+          "n": 80,
+          "mae": 8.256,
+          "rmse": 10.441,
+          "bias": -5.288,
+          "r2": 0.593,
+          "baseline_mae": 11.35,
+          "baseline_rmse": 16.072,
+          "skill_vs_baseline_pct": 27.3,
+          "band_hit_rate": 78.8,
+          "coverage_pct": 35.0
         },
         "30d": {
           "n": 198,
@@ -167,25 +167,25 @@
   },
   "status": {
     "station": "桃園",
-    "observation_rows": 426,
-    "observation_hours": 425,
-    "latest_obs_time": "2026-10-06 23:00:00",
-    "latest_pm25": 11.0,
+    "observation_rows": 427,
+    "observation_hours": 426,
+    "latest_obs_time": "2026-10-07 04:00:00",
+    "latest_pm25": 7.0,
     "latest_band": "良好",
     "latest_color": "#22C55E",
-    "latest_ox": 52.0,
+    "latest_ox": 57.0,
     "forecasts": [
       {
-        "target_time": "2026-10-07 00:00:00",
+        "target_time": "2026-10-07 05:00:00",
         "horizon_h": 1,
-        "y_pred": 11.56,
+        "y_pred": 7.86,
         "band": "良好",
         "color": "#22C55E"
       },
       {
-        "target_time": "2026-10-07 02:00:00",
+        "target_time": "2026-10-07 07:00:00",
         "horizon_h": 3,
-        "y_pred": 11.88,
+        "y_pred": 8.02,
         "band": "良好",
         "color": "#22C55E"
       }
