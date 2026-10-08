@@ -467,3 +467,5 @@
 2026-10-08 09:02:50,桃園,2026-10-08 08:00:00,3,2026-10-08 11:00:00,,,,True,6.46,5.0,55.95,51.0,RandomForestRegressor,HistGradientBoostingRegressor,,,,,,,良好,無資料,,,,,,
 2026-10-08 15:28:44,桃園,2026-10-08 15:00:00,1,2026-10-08 16:00:00,,,,True,5.36,5.0,59.95,59.0,RandomForestRegressor,HistGradientBoostingRegressor,,,,,,,良好,無資料,,,,,,
 2026-10-08 15:28:44,桃園,2026-10-08 15:00:00,3,2026-10-08 18:00:00,,,,True,6.54,5.0,53.18,59.0,RandomForestRegressor,HistGradientBoostingRegressor,,,,,,,良好,無資料,,,,,,
+2026-10-08 23:41:05,桃園,2026-10-08 23:00:00,1,2026-10-09 00:00:00,,,,True,11.84,11.0,57.04,56.0,RandomForestRegressor,HistGradientBoostingRegressor,,,,,,,良好,無資料,,,,,,
+2026-10-08 23:41:05,桃園,2026-10-08 23:00:00,3,2026-10-09 02:00:00,,,,True,10.78,11.0,53.74,56.0,RandomForestRegressor,HistGradientBoostingRegressor,,,,,,,良好,無資料,,,,,,
