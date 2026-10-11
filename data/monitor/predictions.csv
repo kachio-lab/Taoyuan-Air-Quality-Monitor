@@ -493,3 +493,5 @@
 2026-10-11 09:57:54,桃園,2026-10-11 09:00:00,3,2026-10-11 12:00:00,,,,True,11.62,11.0,59.47,55.0,RandomForestRegressor,HistGradientBoostingRegressor
 2026-10-11 16:58:37,桃園,2026-10-11 16:00:00,1,2026-10-11 17:00:00,,,,True,11.48,13.0,50.15,50.0,RandomForestRegressor,HistGradientBoostingRegressor
 2026-10-11 16:58:37,桃園,2026-10-11 16:00:00,3,2026-10-11 19:00:00,,,,True,11.48,13.0,42.07,50.0,RandomForestRegressor,HistGradientBoostingRegressor
+2026-10-11 23:45:57,桃園,2026-10-11 23:00:00,1,2026-10-12 00:00:00,,,,True,12.14,11.0,64.27,62.0,RandomForestRegressor,HistGradientBoostingRegressor
+2026-10-11 23:45:57,桃園,2026-10-11 23:00:00,3,2026-10-12 02:00:00,,,,True,11.88,11.0,57.31,62.0,RandomForestRegressor,HistGradientBoostingRegressor
