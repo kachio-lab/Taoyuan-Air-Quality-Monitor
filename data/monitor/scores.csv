@@ -542,4 +542,6 @@
 2026-10-17 01:28:22,桃園,2026-10-17 01:00:00,1,2026-10-17 02:00:00,,,,True,10.99,13.0,37.52,39.0,RandomForestRegressor,HistGradientBoostingRegressor,,,,,,,良好,無資料,,,,,,
 2026-10-17 01:28:22,桃園,2026-10-17 01:00:00,3,2026-10-17 04:00:00,,,,True,10.2,13.0,33.7,39.0,RandomForestRegressor,HistGradientBoostingRegressor,,,,,,,良好,無資料,,,,,,
 2026-10-17 05:15:45,桃園,2026-10-17 05:00:00,1,2026-10-17 06:00:00,,,,True,10.28,11.0,34.67,36.0,RandomForestRegressor,HistGradientBoostingRegressor,,,,,,,良好,無資料,,,,,,
+2026-10-17 07:39:03,桃園,2026-10-17 07:00:00,1,2026-10-17 08:00:00,,,,True,12.33,11.0,37.46,31.0,RandomForestRegressor,HistGradientBoostingRegressor,,,,,,,良好,無資料,,,,,,
 2026-10-17 05:15:45,桃園,2026-10-17 05:00:00,3,2026-10-17 08:00:00,,,,True,10.51,11.0,41.35,36.0,RandomForestRegressor,HistGradientBoostingRegressor,,,,,,,良好,無資料,,,,,,
+2026-10-17 07:39:03,桃園,2026-10-17 07:00:00,3,2026-10-17 10:00:00,,,,True,11.16,11.0,52.39,31.0,RandomForestRegressor,HistGradientBoostingRegressor,,,,,,,良好,無資料,,,,,,
