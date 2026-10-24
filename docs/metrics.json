@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-25T04:54:21",
-  "pending": 199,
-  "warmup_excluded": 14,
+  "generated_at": "2026-10-25T07:18:59",
+  "pending": 200,
+  "warmup_excluded": 15,
   "warmup_only": false,
   "horizons": {
     "1": {
@@ -9,16 +9,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 200,
-          "mae": 2.737,
-          "rmse": 3.6,
-          "bias": -0.652,
-          "r2": 0.728,
-          "baseline_mae": 3.225,
-          "baseline_rmse": 4.102,
-          "skill_vs_baseline_pct": 15.1,
-          "band_hit_rate": 80.5,
-          "coverage_pct": 87.5
+          "n": 197,
+          "mae": 2.742,
+          "rmse": 3.603,
+          "bias": -0.624,
+          "r2": 0.731,
+          "baseline_mae": 3.213,
+          "baseline_rmse": 4.098,
+          "skill_vs_baseline_pct": 14.7,
+          "band_hit_rate": 80.7,
+          "coverage_pct": 87.8
         },
         "all": {
           "n": 210,
@@ -37,16 +37,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 190,
-          "mae": 3.534,
-          "rmse": 4.697,
-          "bias": -1.383,
-          "r2": 0.922,
-          "baseline_mae": 4.679,
-          "baseline_rmse": 6.42,
-          "skill_vs_baseline_pct": 24.5,
-          "band_hit_rate": 79.5,
-          "coverage_pct": 75.3
+          "n": 187,
+          "mae": 3.546,
+          "rmse": 4.717,
+          "bias": -1.442,
+          "r2": 0.918,
+          "baseline_mae": 4.727,
+          "baseline_rmse": 6.464,
+          "skill_vs_baseline_pct": 25.0,
+          "band_hit_rate": 79.7,
+          "coverage_pct": 74.9
         },
         "all": {
           "n": 200,
@@ -67,16 +67,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 201,
-          "mae": 3.757,
-          "rmse": 4.985,
-          "bias": -1.445,
-          "r2": 0.483,
-          "baseline_mae": 4.269,
-          "baseline_rmse": 5.539,
-          "skill_vs_baseline_pct": 12.0,
-          "band_hit_rate": 75.6,
-          "coverage_pct": 73.6
+          "n": 198,
+          "mae": 3.768,
+          "rmse": 4.997,
+          "bias": -1.424,
+          "r2": 0.487,
+          "baseline_mae": 4.253,
+          "baseline_rmse": 5.518,
+          "skill_vs_baseline_pct": 11.4,
+          "band_hit_rate": 75.8,
+          "coverage_pct": 73.7
         },
         "all": {
           "n": 209,
@@ -95,16 +95,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 190,
-          "mae": 7.47,
-          "rmse": 9.553,
-          "bias": -4.086,
-          "r2": 0.678,
-          "baseline_mae": 10.863,
-          "baseline_rmse": 14.637,
-          "skill_vs_baseline_pct": 31.2,
-          "band_hit_rate": 74.7,
-          "coverage_pct": 41.1
+          "n": 187,
+          "mae": 7.499,
+          "rmse": 9.6,
+          "bias": -4.242,
+          "r2": 0.664,
+          "baseline_mae": 10.936,
+          "baseline_rmse": 14.728,
+          "skill_vs_baseline_pct": 31.4,
+          "band_hit_rate": 74.9,
+          "coverage_pct": 41.2
         },
         "all": {
           "n": 198,
@@ -123,25 +123,25 @@
   },
   "status": {
     "station": "桃園",
-    "observation_rows": 515,
-    "observation_hours": 514,
-    "latest_obs_time": "2026-10-25 04:00:00",
-    "latest_pm25": 4.0,
+    "observation_rows": 516,
+    "observation_hours": 515,
+    "latest_obs_time": "2026-10-25 07:00:00",
+    "latest_pm25": 6.0,
     "latest_band": "良好",
     "latest_color": "#22C55E",
-    "latest_ox": 28.0,
+    "latest_ox": 23.0,
     "forecasts": [
       {
-        "target_time": "2026-10-25 05:00:00",
+        "target_time": "2026-10-25 08:00:00",
         "horizon_h": 1,
-        "y_pred": 4.91,
+        "y_pred": 7.2,
         "band": "良好",
         "color": "#22C55E"
       },
       {
-        "target_time": "2026-10-25 07:00:00",
+        "target_time": "2026-10-25 10:00:00",
         "horizon_h": 3,
-        "y_pred": 5.13,
+        "y_pred": 6.58,
         "band": "良好",
         "color": "#22C55E"
       }
