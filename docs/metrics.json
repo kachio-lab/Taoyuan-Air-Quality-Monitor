@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-26T03:42:04",
-  "pending": 209,
-  "warmup_excluded": 16,
+  "generated_at": "2026-10-26T06:36:42",
+  "pending": 210,
+  "warmup_excluded": 17,
   "warmup_only": false,
   "horizons": {
     "1": {
@@ -9,16 +9,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 177,
-          "mae": 2.743,
-          "rmse": 3.619,
-          "bias": -0.573,
-          "r2": 0.75,
-          "baseline_mae": 3.158,
-          "baseline_rmse": 4.05,
-          "skill_vs_baseline_pct": 13.1,
-          "band_hit_rate": 83.1,
-          "coverage_pct": 88.1
+          "n": 174,
+          "mae": 2.752,
+          "rmse": 3.629,
+          "bias": -0.545,
+          "r2": 0.752,
+          "baseline_mae": 3.138,
+          "baseline_rmse": 4.044,
+          "skill_vs_baseline_pct": 12.3,
+          "band_hit_rate": 83.3,
+          "coverage_pct": 88.5
         },
         "all": {
           "n": 210,
@@ -37,16 +37,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 167,
-          "mae": 3.637,
-          "rmse": 4.825,
-          "bias": -1.547,
-          "r2": 0.911,
-          "baseline_mae": 4.647,
-          "baseline_rmse": 6.356,
-          "skill_vs_baseline_pct": 21.7,
-          "band_hit_rate": 82.0,
-          "coverage_pct": 73.7
+          "n": 165,
+          "mae": 3.675,
+          "rmse": 4.853,
+          "bias": -1.561,
+          "r2": 0.907,
+          "baseline_mae": 4.697,
+          "baseline_rmse": 6.394,
+          "skill_vs_baseline_pct": 21.8,
+          "band_hit_rate": 82.4,
+          "coverage_pct": 73.3
         },
         "all": {
           "n": 200,
@@ -67,16 +67,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 178,
-          "mae": 3.802,
-          "rmse": 5.093,
-          "bias": -1.364,
-          "r2": 0.509,
-          "baseline_mae": 4.331,
-          "baseline_rmse": 5.647,
-          "skill_vs_baseline_pct": 12.2,
-          "band_hit_rate": 78.1,
-          "coverage_pct": 74.2
+          "n": 175,
+          "mae": 3.797,
+          "rmse": 5.099,
+          "bias": -1.338,
+          "r2": 0.515,
+          "baseline_mae": 4.309,
+          "baseline_rmse": 5.646,
+          "skill_vs_baseline_pct": 11.9,
+          "band_hit_rate": 78.9,
+          "coverage_pct": 74.3
         },
         "all": {
           "n": 209,
@@ -95,16 +95,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 167,
-          "mae": 7.668,
-          "rmse": 9.767,
-          "bias": -4.384,
-          "r2": 0.639,
-          "baseline_mae": 10.497,
-          "baseline_rmse": 14.132,
-          "skill_vs_baseline_pct": 27.0,
-          "band_hit_rate": 77.2,
-          "coverage_pct": 40.1
+          "n": 165,
+          "mae": 7.749,
+          "rmse": 9.825,
+          "bias": -4.45,
+          "r2": 0.623,
+          "baseline_mae": 10.588,
+          "baseline_rmse": 14.213,
+          "skill_vs_baseline_pct": 26.8,
+          "band_hit_rate": 77.6,
+          "coverage_pct": 39.4
         },
         "all": {
           "n": 198,
@@ -123,25 +123,25 @@
   },
   "status": {
     "station": "桃園",
-    "observation_rows": 521,
-    "observation_hours": 520,
-    "latest_obs_time": "2026-10-26 03:00:00",
-    "latest_pm25": 8.0,
+    "observation_rows": 522,
+    "observation_hours": 521,
+    "latest_obs_time": "2026-10-26 06:00:00",
+    "latest_pm25": 6.0,
     "latest_band": "良好",
     "latest_color": "#22C55E",
-    "latest_ox": 46.0,
+    "latest_ox": 42.0,
     "forecasts": [
       {
-        "target_time": "2026-10-26 04:00:00",
+        "target_time": "2026-10-26 07:00:00",
         "horizon_h": 1,
-        "y_pred": 7.33,
+        "y_pred": 5.43,
         "band": "良好",
         "color": "#22C55E"
       },
       {
-        "target_time": "2026-10-26 06:00:00",
+        "target_time": "2026-10-26 09:00:00",
         "horizon_h": 3,
-        "y_pred": 5.83,
+        "y_pred": 6.08,
         "band": "良好",
         "color": "#22C55E"
       }
