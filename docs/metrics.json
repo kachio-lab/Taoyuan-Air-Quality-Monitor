@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-28T00:43:20",
-  "pending": 223,
+  "generated_at": "2026-10-28T05:22:26",
+  "pending": 225,
   "warmup_excluded": 18,
   "warmup_only": false,
   "horizons": {
@@ -9,16 +9,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 132,
-          "mae": 2.708,
-          "rmse": 3.495,
-          "bias": -0.275,
-          "r2": 0.772,
-          "baseline_mae": 3.038,
-          "baseline_rmse": 3.905,
-          "skill_vs_baseline_pct": 10.8,
-          "band_hit_rate": 83.3,
-          "coverage_pct": 88.6
+          "n": 127,
+          "mae": 2.726,
+          "rmse": 3.519,
+          "bias": -0.23,
+          "r2": 0.771,
+          "baseline_mae": 3.016,
+          "baseline_rmse": 3.911,
+          "skill_vs_baseline_pct": 9.6,
+          "band_hit_rate": 82.7,
+          "coverage_pct": 89.0
         },
         "all": {
           "n": 210,
@@ -37,16 +37,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 124,
-          "mae": 3.872,
-          "rmse": 5.162,
-          "bias": -1.517,
-          "r2": 0.907,
-          "baseline_mae": 4.79,
-          "baseline_rmse": 6.407,
-          "skill_vs_baseline_pct": 19.2,
-          "band_hit_rate": 82.3,
-          "coverage_pct": 72.6
+          "n": 119,
+          "mae": 4.004,
+          "rmse": 5.266,
+          "bias": -1.574,
+          "r2": 0.903,
+          "baseline_mae": 4.908,
+          "baseline_rmse": 6.523,
+          "skill_vs_baseline_pct": 18.4,
+          "band_hit_rate": 81.5,
+          "coverage_pct": 71.4
         },
         "all": {
           "n": 200,
@@ -67,16 +67,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 133,
-          "mae": 3.53,
-          "rmse": 4.802,
-          "bias": -0.901,
-          "r2": 0.573,
-          "baseline_mae": 4.038,
-          "baseline_rmse": 5.218,
-          "skill_vs_baseline_pct": 12.6,
-          "band_hit_rate": 82.0,
-          "coverage_pct": 75.9
+          "n": 128,
+          "mae": 3.561,
+          "rmse": 4.851,
+          "bias": -0.882,
+          "r2": 0.567,
+          "baseline_mae": 4.055,
+          "baseline_rmse": 5.255,
+          "skill_vs_baseline_pct": 12.2,
+          "band_hit_rate": 81.2,
+          "coverage_pct": 75.0
         },
         "all": {
           "n": 209,
@@ -95,16 +95,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 124,
-          "mae": 7.612,
-          "rmse": 9.853,
-          "bias": -3.658,
-          "r2": 0.664,
-          "baseline_mae": 10.669,
-          "baseline_rmse": 14.406,
-          "skill_vs_baseline_pct": 28.7,
-          "band_hit_rate": 80.6,
-          "coverage_pct": 41.1
+          "n": 119,
+          "mae": 7.867,
+          "rmse": 10.052,
+          "bias": -3.777,
+          "r2": 0.651,
+          "baseline_mae": 10.756,
+          "baseline_rmse": 14.573,
+          "skill_vs_baseline_pct": 26.9,
+          "band_hit_rate": 79.8,
+          "coverage_pct": 38.7
         },
         "all": {
           "n": 198,
@@ -123,27 +123,27 @@
   },
   "status": {
     "station": "桃園",
-    "observation_rows": 530,
-    "observation_hours": 528,
-    "latest_obs_time": "2026-10-28 00:00:00",
-    "latest_pm25": 18.0,
-    "latest_band": "普通",
-    "latest_color": "#FACC15",
-    "latest_ox": 57.0,
+    "observation_rows": 531,
+    "observation_hours": 529,
+    "latest_obs_time": "2026-10-28 05:00:00",
+    "latest_pm25": 15.0,
+    "latest_band": "良好",
+    "latest_color": "#22C55E",
+    "latest_ox": 43.0,
     "forecasts": [
       {
-        "target_time": "2026-10-28 01:00:00",
+        "target_time": "2026-10-28 06:00:00",
         "horizon_h": 1,
-        "y_pred": 16.17,
-        "band": "普通",
-        "color": "#FACC15"
+        "y_pred": 14.75,
+        "band": "良好",
+        "color": "#22C55E"
       },
       {
-        "target_time": "2026-10-28 03:00:00",
+        "target_time": "2026-10-28 08:00:00",
         "horizon_h": 3,
-        "y_pred": 16.18,
-        "band": "普通",
-        "color": "#FACC15"
+        "y_pred": 14.6,
+        "band": "良好",
+        "color": "#22C55E"
       }
     ],
     "warmup": true,
