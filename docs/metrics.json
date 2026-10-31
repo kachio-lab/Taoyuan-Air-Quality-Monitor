@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-31T20:40:26",
-  "pending": 254,
+  "generated_at": "2026-11-01T01:47:36",
+  "pending": 256,
   "warmup_excluded": 19,
   "warmup_only": false,
   "horizons": {
@@ -9,16 +9,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 42,
-          "mae": 2.07,
-          "rmse": 2.809,
-          "bias": 0.267,
-          "r2": 0.438,
-          "baseline_mae": 2.214,
-          "baseline_rmse": 3.32,
-          "skill_vs_baseline_pct": 6.5,
-          "band_hit_rate": 95.2,
-          "coverage_pct": 92.9
+          "n": 37,
+          "mae": 1.681,
+          "rmse": 2.152,
+          "bias": 0.487,
+          "r2": -0.153,
+          "baseline_mae": 1.838,
+          "baseline_rmse": 2.691,
+          "skill_vs_baseline_pct": 8.5,
+          "band_hit_rate": 97.3,
+          "coverage_pct": 97.3
         },
         "all": {
           "n": 210,
@@ -37,16 +37,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 39,
-          "mae": 3.629,
-          "rmse": 4.677,
-          "bias": -2.219,
-          "r2": 0.324,
-          "baseline_mae": 3.41,
-          "baseline_rmse": 4.276,
-          "skill_vs_baseline_pct": -6.4,
-          "band_hit_rate": 94.9,
-          "coverage_pct": 76.9
+          "n": 34,
+          "mae": 3.419,
+          "rmse": 4.374,
+          "bias": -2.135,
+          "r2": 0.356,
+          "baseline_mae": 3.118,
+          "baseline_rmse": 4.051,
+          "skill_vs_baseline_pct": -9.7,
+          "band_hit_rate": 97.1,
+          "coverage_pct": 79.4
         },
         "all": {
           "n": 200,
@@ -67,16 +67,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 43,
-          "mae": 2.737,
-          "rmse": 3.474,
-          "bias": 0.543,
-          "r2": 0.123,
-          "baseline_mae": 3.698,
-          "baseline_rmse": 4.839,
-          "skill_vs_baseline_pct": 26.0,
-          "band_hit_rate": 88.4,
-          "coverage_pct": 83.7
+          "n": 38,
+          "mae": 2.452,
+          "rmse": 3.053,
+          "bias": 0.845,
+          "r2": -1.375,
+          "baseline_mae": 3.184,
+          "baseline_rmse": 4.221,
+          "skill_vs_baseline_pct": 23.0,
+          "band_hit_rate": 92.1,
+          "coverage_pct": 89.5
         },
         "all": {
           "n": 209,
@@ -95,16 +95,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 40,
-          "mae": 6.379,
-          "rmse": 7.8,
-          "bias": -3.275,
-          "r2": -0.333,
-          "baseline_mae": 5.275,
-          "baseline_rmse": 7.398,
-          "skill_vs_baseline_pct": -20.9,
-          "band_hit_rate": 87.5,
-          "coverage_pct": 45.0
+          "n": 35,
+          "mae": 5.511,
+          "rmse": 6.794,
+          "bias": -1.963,
+          "r2": -0.054,
+          "baseline_mae": 5.343,
+          "baseline_rmse": 7.648,
+          "skill_vs_baseline_pct": -3.1,
+          "band_hit_rate": 91.4,
+          "coverage_pct": 51.4
         },
         "all": {
           "n": 198,
@@ -123,25 +123,25 @@
   },
   "status": {
     "station": "桃園",
-    "observation_rows": 546,
-    "observation_hours": 544,
-    "latest_obs_time": "2026-10-31 20:00:00",
-    "latest_pm25": 15.0,
+    "observation_rows": 547,
+    "observation_hours": 545,
+    "latest_obs_time": "2026-11-01 01:00:00",
+    "latest_pm25": 9.0,
     "latest_band": "良好",
     "latest_color": "#22C55E",
-    "latest_ox": 56.0,
+    "latest_ox": 52.0,
     "forecasts": [
       {
-        "target_time": "2026-10-31 21:00:00",
+        "target_time": "2026-11-01 02:00:00",
         "horizon_h": 1,
-        "y_pred": 15.79,
-        "band": "普通",
-        "color": "#FACC15"
+        "y_pred": 10.27,
+        "band": "良好",
+        "color": "#22C55E"
       },
       {
-        "target_time": "2026-10-31 23:00:00",
+        "target_time": "2026-11-01 04:00:00",
         "horizon_h": 3,
-        "y_pred": 15.25,
+        "y_pred": 11.18,
         "band": "良好",
         "color": "#22C55E"
       }
