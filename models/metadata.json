@@ -8,32 +8,32 @@
       "model_file": "pm25_桃園_h1.joblib",
       "best_algorithm": "RandomForest",
       "feature_count": 43,
-      "train_rows": 13876,
+      "train_rows": 13921,
       "train_start": "2025-01-01 01:00:00",
-      "train_end": "2026-10-02 01:00:00",
+      "train_end": "2026-10-25 08:00:00",
       "cv": {
-        "cv_rmse": 3.553559746983537,
-        "cv_mae": 2.6555898723826408,
-        "cv_r2": 0.753456398449482,
+        "cv_rmse": 3.5498741955579574,
+        "cv_mae": 2.6509375401712276,
+        "cv_r2": 0.7527005083756994,
         "cv_rmse_folds": [
-          3.9635,
-          3.1843,
-          3.3818,
-          4.1227,
-          3.1155
+          3.9582,
+          3.1786,
+          3.3912,
+          4.1056,
+          3.1158
         ]
       },
       "cv_all": {
-        "HistGradientBoosting": 3.6526,
-        "RandomForest": 3.5536,
-        "Ridge": 3.6918,
-        "LightGBM": 3.6466
+        "HistGradientBoosting": 3.617,
+        "RandomForest": 3.5499,
+        "Ridge": 3.6604,
+        "LightGBM": 3.6649
       },
       "persistence_baseline": {
-        "rmse": 3.9390705380796938,
-        "mae": 2.762607179189071
+        "rmse": 3.935282367404469,
+        "mae": 2.7595303667198143
       },
-      "trained_at": "2026-10-02T02:45:23"
+      "trained_at": "2026-11-02T03:13:54"
     },
     "pm2.5_h3": {
       "station": "桃園",
@@ -42,32 +42,32 @@
       "model_file": "pm25_桃園_h3.joblib",
       "best_algorithm": "RandomForest",
       "feature_count": 43,
-      "train_rows": 13858,
+      "train_rows": 13919,
       "train_start": "2025-01-01 01:00:00",
-      "train_end": "2026-10-01 23:00:00",
+      "train_end": "2026-11-01 06:00:00",
       "cv": {
-        "cv_rmse": 4.8962950862565915,
-        "cv_mae": 3.761974841843832,
-        "cv_r2": 0.5325020571118442,
+        "cv_rmse": 4.8971130116659145,
+        "cv_mae": 3.7619644550460585,
+        "cv_r2": 0.5288115503728715,
         "cv_rmse_folds": [
-          5.7271,
-          4.5046,
-          4.5624,
-          5.6359,
-          4.0516
+          5.7589,
+          4.5036,
+          4.5855,
+          5.6023,
+          4.0353
         ]
       },
       "cv_all": {
-        "HistGradientBoosting": 5.3245,
-        "RandomForest": 4.8963,
-        "Ridge": 5.0885,
-        "LightGBM": 5.2806
+        "HistGradientBoosting": 5.2364,
+        "RandomForest": 4.8971,
+        "Ridge": 4.9499,
+        "LightGBM": 5.3099
       },
       "persistence_baseline": {
-        "rmse": 5.542271285325682,
-        "mae": 3.964114135973213
+        "rmse": 5.539219565105338,
+        "mae": 3.9620299114273267
       },
-      "trained_at": "2026-10-02T02:45:45"
+      "trained_at": "2026-11-02T03:14:25"
     },
     "ox_h1": {
       "station": "桃園",
@@ -76,66 +76,66 @@
       "model_file": "ox_桃園_h1.joblib",
       "best_algorithm": "HistGradientBoosting",
       "feature_count": 43,
-      "train_rows": 13585,
+      "train_rows": 13624,
       "train_start": "2025-01-01 01:00:00",
-      "train_end": "2026-10-02 01:00:00",
+      "train_end": "2026-10-25 08:00:00",
       "cv": {
-        "cv_rmse": 4.541280548524404,
-        "cv_mae": 3.1164849791775238,
-        "cv_r2": 0.8935453727496686,
+        "cv_rmse": 4.54983545490077,
+        "cv_mae": 3.1201939647072328,
+        "cv_r2": 0.8932422450295736,
         "cv_rmse_folds": [
-          5.8943,
-          5.8536,
-          2.7966,
-          3.3406,
-          4.8213
+          5.8799,
+          5.8284,
+          2.7981,
+          3.3468,
+          4.896
         ]
       },
       "cv_all": {
-        "HistGradientBoosting": 4.5413,
-        "RandomForest": 4.6614,
-        "Ridge": 4.7928,
-        "LightGBM": 4.5155
+        "HistGradientBoosting": 4.5498,
+        "RandomForest": 4.6563,
+        "Ridge": 4.8162,
+        "LightGBM": 4.5217
       },
       "persistence_baseline": {
-        "rmse": 4.715271818202486,
-        "mae": 3.0011039009472666
+        "rmse": 4.713108936496942,
+        "mae": 3.000729329463422
       },
-      "trained_at": "2026-10-02T02:46:02"
+      "trained_at": "2026-11-02T03:14:51"
     },
     "ox_h3": {
       "station": "桃園",
       "target": "ox",
       "horizon": 3,
       "model_file": "ox_桃園_h3.joblib",
-      "best_algorithm": "HistGradientBoosting",
+      "best_algorithm": "LightGBM",
       "feature_count": 43,
-      "train_rows": 13552,
+      "train_rows": 13609,
       "train_start": "2025-01-01 01:00:00",
-      "train_end": "2026-10-01 23:00:00",
+      "train_end": "2026-11-01 06:00:00",
       "cv": {
-        "cv_rmse": 8.081697290575102,
-        "cv_mae": 5.840649522511123,
-        "cv_r2": 0.6468144104550555,
+        "cv_rmse": 8.078181907617056,
+        "cv_mae": 5.856162792232206,
+        "cv_r2": 0.6490453973465684,
         "cv_rmse_folds": [
-          10.3567,
-          10.0106,
-          5.7141,
-          5.8676,
-          8.4596
+          10.3293,
+          9.9517,
+          5.6166,
+          6.0162,
+          8.4771
         ]
       },
       "cv_all": {
-        "HistGradientBoosting": 8.0817,
-        "RandomForest": 8.1765,
-        "Ridge": 9.3019,
-        "LightGBM": 8.106
+        "HistGradientBoosting": 8.1824,
+        "RandomForest": 8.1685,
+        "Ridge": 9.3452,
+        "LightGBM": 8.0782
       },
       "persistence_baseline": {
-        "rmse": 10.407951548496332,
-        "mae": 6.874670383485271
+        "rmse": 10.402169216467701,
+        "mae": 6.870668270314966
       },
-      "trained_at": "2026-10-02T02:46:19"
+      "trained_at": "2026-11-02T03:15:17"
     }
   }
 }
