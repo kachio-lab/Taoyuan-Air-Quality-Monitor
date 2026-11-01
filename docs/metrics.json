@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-01T23:15:02",
-  "pending": 264,
+  "generated_at": "2026-11-02T03:43:54",
+  "pending": 266,
   "warmup_excluded": 19,
   "warmup_only": false,
   "horizons": {
@@ -9,14 +9,14 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 15,
-          "mae": 1.511,
-          "rmse": 1.903,
-          "bias": 0.308,
-          "r2": 0.212,
-          "baseline_mae": 1.467,
-          "baseline_rmse": 2.0,
-          "skill_vs_baseline_pct": -3.0,
+          "n": 11,
+          "mae": 1.289,
+          "rmse": 1.539,
+          "bias": 0.473,
+          "r2": 0.33,
+          "baseline_mae": 1.455,
+          "baseline_rmse": 1.758,
+          "skill_vs_baseline_pct": 11.4,
           "band_hit_rate": 100.0,
           "coverage_pct": 100.0
         },
@@ -37,16 +37,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 12,
-          "mae": 3.36,
-          "rmse": 4.879,
-          "bias": -2.663,
-          "r2": -2.746,
-          "baseline_mae": 3.0,
-          "baseline_rmse": 3.786,
-          "skill_vs_baseline_pct": -12.0,
+          "n": 9,
+          "mae": 3.362,
+          "rmse": 4.978,
+          "bias": -2.791,
+          "r2": -4.939,
+          "baseline_mae": 2.222,
+          "baseline_rmse": 2.944,
+          "skill_vs_baseline_pct": -51.3,
           "band_hit_rate": 100.0,
-          "coverage_pct": 75.0
+          "coverage_pct": 77.8
         },
         "all": {
           "n": 200,
@@ -67,16 +67,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 16,
-          "mae": 2.224,
-          "rmse": 2.545,
-          "bias": 0.248,
-          "r2": -0.493,
-          "baseline_mae": 2.625,
-          "baseline_rmse": 3.162,
-          "skill_vs_baseline_pct": 15.3,
+          "n": 12,
+          "mae": 2.002,
+          "rmse": 2.245,
+          "bias": 0.247,
+          "r2": -0.512,
+          "baseline_mae": 2.417,
+          "baseline_rmse": 2.958,
+          "skill_vs_baseline_pct": 17.2,
           "band_hit_rate": 100.0,
-          "coverage_pct": 93.8
+          "coverage_pct": 100.0
         },
         "all": {
           "n": 209,
@@ -95,16 +95,16 @@
         "24h": null,
         "7d": null,
         "30d": {
-          "n": 13,
-          "mae": 4.898,
-          "rmse": 5.991,
-          "bias": -0.945,
-          "r2": 0.298,
-          "baseline_mae": 3.846,
-          "baseline_rmse": 5.491,
-          "skill_vs_baseline_pct": -27.4,
+          "n": 10,
+          "mae": 4.94,
+          "rmse": 6.091,
+          "bias": 0.08,
+          "r2": 0.416,
+          "baseline_mae": 4.1,
+          "baseline_rmse": 5.975,
+          "skill_vs_baseline_pct": -20.5,
           "band_hit_rate": 100.0,
-          "coverage_pct": 53.8
+          "coverage_pct": 60.0
         },
         "all": {
           "n": 198,
@@ -123,27 +123,27 @@
   },
   "status": {
     "station": "桃園",
-    "observation_rows": 551,
-    "observation_hours": 549,
-    "latest_obs_time": "2026-11-01 23:00:00",
-    "latest_pm25": 20.0,
-    "latest_band": "普通",
-    "latest_color": "#FACC15",
-    "latest_ox": 38.0,
+    "observation_rows": 552,
+    "observation_hours": 550,
+    "latest_obs_time": "2026-11-02 03:00:00",
+    "latest_pm25": 8.0,
+    "latest_band": "良好",
+    "latest_color": "#22C55E",
+    "latest_ox": 30.0,
     "forecasts": [
       {
-        "target_time": "2026-11-02 00:00:00",
+        "target_time": "2026-11-02 04:00:00",
         "horizon_h": 1,
-        "y_pred": 19.46,
-        "band": "普通",
-        "color": "#FACC15"
+        "y_pred": 9.81,
+        "band": "良好",
+        "color": "#22C55E"
       },
       {
-        "target_time": "2026-11-02 02:00:00",
+        "target_time": "2026-11-02 06:00:00",
         "horizon_h": 3,
-        "y_pred": 17.97,
-        "band": "普通",
-        "color": "#FACC15"
+        "y_pred": 12.29,
+        "band": "良好",
+        "color": "#22C55E"
       }
     ],
     "warmup": true,
@@ -157,32 +157,32 @@
           "model_file": "pm25_桃園_h1.joblib",
           "best_algorithm": "RandomForest",
           "feature_count": 43,
-          "train_rows": 13876,
+          "train_rows": 13921,
           "train_start": "2025-01-01 01:00:00",
-          "train_end": "2026-10-02 01:00:00",
+          "train_end": "2026-10-25 08:00:00",
           "cv": {
-            "cv_rmse": 3.553559746983537,
-            "cv_mae": 2.6555898723826408,
-            "cv_r2": 0.753456398449482,
+            "cv_rmse": 3.5498741955579574,
+            "cv_mae": 2.6509375401712276,
+            "cv_r2": 0.7527005083756994,
             "cv_rmse_folds": [
-              3.9635,
-              3.1843,
-              3.3818,
-              4.1227,
-              3.1155
+              3.9582,
+              3.1786,
+              3.3912,
+              4.1056,
+              3.1158
             ]
           },
           "cv_all": {
-            "HistGradientBoosting": 3.6526,
-            "RandomForest": 3.5536,
-            "Ridge": 3.6918,
-            "LightGBM": 3.6466
+            "HistGradientBoosting": 3.617,
+            "RandomForest": 3.5499,
+            "Ridge": 3.6604,
+            "LightGBM": 3.6649
           },
           "persistence_baseline": {
-            "rmse": 3.9390705380796938,
-            "mae": 2.762607179189071
+            "rmse": 3.935282367404469,
+            "mae": 2.7595303667198143
           },
-          "trained_at": "2026-10-02T02:45:23"
+          "trained_at": "2026-11-02T03:13:54"
         },
         "pm2.5_h3": {
           "station": "桃園",
@@ -191,32 +191,32 @@
           "model_file": "pm25_桃園_h3.joblib",
           "best_algorithm": "RandomForest",
           "feature_count": 43,
-          "train_rows": 13858,
+          "train_rows": 13919,
           "train_start": "2025-01-01 01:00:00",
-          "train_end": "2026-10-01 23:00:00",
+          "train_end": "2026-11-01 06:00:00",
           "cv": {
-            "cv_rmse": 4.8962950862565915,
-            "cv_mae": 3.761974841843832,
-            "cv_r2": 0.5325020571118442,
+            "cv_rmse": 4.8971130116659145,
+            "cv_mae": 3.7619644550460585,
+            "cv_r2": 0.5288115503728715,
             "cv_rmse_folds": [
-              5.7271,
-              4.5046,
-              4.5624,
-              5.6359,
-              4.0516
+              5.7589,
+              4.5036,
+              4.5855,
+              5.6023,
+              4.0353
             ]
           },
           "cv_all": {
-            "HistGradientBoosting": 5.3245,
-            "RandomForest": 4.8963,
-            "Ridge": 5.0885,
-            "LightGBM": 5.2806
+            "HistGradientBoosting": 5.2364,
+            "RandomForest": 4.8971,
+            "Ridge": 4.9499,
+            "LightGBM": 5.3099
           },
           "persistence_baseline": {
-            "rmse": 5.542271285325682,
-            "mae": 3.964114135973213
+            "rmse": 5.539219565105338,
+            "mae": 3.9620299114273267
           },
-          "trained_at": "2026-10-02T02:45:45"
+          "trained_at": "2026-11-02T03:14:25"
         },
         "ox_h1": {
           "station": "桃園",
@@ -225,66 +225,66 @@
           "model_file": "ox_桃園_h1.joblib",
           "best_algorithm": "HistGradientBoosting",
           "feature_count": 43,
-          "train_rows": 13585,
+          "train_rows": 13624,
           "train_start": "2025-01-01 01:00:00",
-          "train_end": "2026-10-02 01:00:00",
+          "train_end": "2026-10-25 08:00:00",
           "cv": {
-            "cv_rmse": 4.541280548524404,
-            "cv_mae": 3.1164849791775238,
-            "cv_r2": 0.8935453727496686,
+            "cv_rmse": 4.54983545490077,
+            "cv_mae": 3.1201939647072328,
+            "cv_r2": 0.8932422450295736,
             "cv_rmse_folds": [
-              5.8943,
-              5.8536,
-              2.7966,
-              3.3406,
-              4.8213
+              5.8799,
+              5.8284,
+              2.7981,
+              3.3468,
+              4.896
             ]
           },
           "cv_all": {
-            "HistGradientBoosting": 4.5413,
-            "RandomForest": 4.6614,
-            "Ridge": 4.7928,
-            "LightGBM": 4.5155
+            "HistGradientBoosting": 4.5498,
+            "RandomForest": 4.6563,
+            "Ridge": 4.8162,
+            "LightGBM": 4.5217
           },
           "persistence_baseline": {
-            "rmse": 4.715271818202486,
-            "mae": 3.0011039009472666
+            "rmse": 4.713108936496942,
+            "mae": 3.000729329463422
           },
-          "trained_at": "2026-10-02T02:46:02"
+          "trained_at": "2026-11-02T03:14:51"
         },
         "ox_h3": {
           "station": "桃園",
           "target": "ox",
           "horizon": 3,
           "model_file": "ox_桃園_h3.joblib",
-          "best_algorithm": "HistGradientBoosting",
+          "best_algorithm": "LightGBM",
           "feature_count": 43,
-          "train_rows": 13552,
+          "train_rows": 13609,
           "train_start": "2025-01-01 01:00:00",
-          "train_end": "2026-10-01 23:00:00",
+          "train_end": "2026-11-01 06:00:00",
           "cv": {
-            "cv_rmse": 8.081697290575102,
-            "cv_mae": 5.840649522511123,
-            "cv_r2": 0.6468144104550555,
+            "cv_rmse": 8.078181907617056,
+            "cv_mae": 5.856162792232206,
+            "cv_r2": 0.6490453973465684,
             "cv_rmse_folds": [
-              10.3567,
-              10.0106,
-              5.7141,
-              5.8676,
-              8.4596
+              10.3293,
+              9.9517,
+              5.6166,
+              6.0162,
+              8.4771
             ]
           },
           "cv_all": {
-            "HistGradientBoosting": 8.0817,
-            "RandomForest": 8.1765,
-            "Ridge": 9.3019,
-            "LightGBM": 8.106
+            "HistGradientBoosting": 8.1824,
+            "RandomForest": 8.1685,
+            "Ridge": 9.3452,
+            "LightGBM": 8.0782
           },
           "persistence_baseline": {
-            "rmse": 10.407951548496332,
-            "mae": 6.874670383485271
+            "rmse": 10.402169216467701,
+            "mae": 6.870668270314966
           },
-          "trained_at": "2026-10-02T02:46:19"
+          "trained_at": "2026-11-02T03:15:17"
         }
       }
     }
