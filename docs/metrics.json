@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-05T23:32:12",
-  "pending": 292,
+  "generated_at": "2026-11-06T06:04:27",
+  "pending": 294,
   "warmup_excluded": 19,
   "warmup_only": false,
   "horizons": {
@@ -79,25 +79,25 @@
   },
   "status": {
     "station": "桃園",
-    "observation_rows": 565,
-    "observation_hours": 563,
-    "latest_obs_time": "2026-11-05 23:00:00",
-    "latest_pm25": 15.0,
+    "observation_rows": 566,
+    "observation_hours": 564,
+    "latest_obs_time": "2026-11-06 05:00:00",
+    "latest_pm25": 7.0,
     "latest_band": "良好",
     "latest_color": "#22C55E",
-    "latest_ox": 47.0,
+    "latest_ox": 50.0,
     "forecasts": [
       {
-        "target_time": "2026-11-06 00:00:00",
+        "target_time": "2026-11-06 06:00:00",
         "horizon_h": 1,
-        "y_pred": 15.61,
-        "band": "普通",
-        "color": "#FACC15"
+        "y_pred": 7.94,
+        "band": "良好",
+        "color": "#22C55E"
       },
       {
-        "target_time": "2026-11-06 02:00:00",
+        "target_time": "2026-11-06 08:00:00",
         "horizon_h": 3,
-        "y_pred": 14.91,
+        "y_pred": 7.86,
         "band": "良好",
         "color": "#22C55E"
       }
