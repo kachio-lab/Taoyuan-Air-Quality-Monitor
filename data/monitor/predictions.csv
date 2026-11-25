@@ -859,3 +859,5 @@
 2026-11-24 19:00:11,桃園,2026-11-24 18:00:00,3,2026-11-24 21:00:00,,,,True,11.16,11.0,44.71,45.0,RandomForestRegressor,LGBMRegressor
 2026-11-25 12:17:50,桃園,2026-11-25 12:00:00,1,2026-11-25 13:00:00,,,,True,7.91,8.0,34.4,33.0,RandomForestRegressor,HistGradientBoostingRegressor
 2026-11-25 12:17:50,桃園,2026-11-25 12:00:00,3,2026-11-25 15:00:00,,,,True,8.01,8.0,33.72,33.0,RandomForestRegressor,LGBMRegressor
+2026-11-25 22:34:35,桃園,2026-11-25 22:00:00,1,2026-11-25 23:00:00,,,,True,6.05,7.0,34.1,34.0,RandomForestRegressor,HistGradientBoostingRegressor
+2026-11-25 22:34:35,桃園,2026-11-25 22:00:00,3,2026-11-26 01:00:00,,,,True,5.24,7.0,33.58,34.0,RandomForestRegressor,LGBMRegressor
