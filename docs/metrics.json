@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T03:05:07",
+  "generated_at": "2026-11-27T10:14:41",
   "pending": 427,
   "warmup_excluded": 20,
   "warmup_only": false,
@@ -79,7 +79,7 @@
   },
   "status": {
     "station": "桃園",
-    "observation_rows": 634,
+    "observation_rows": 635,
     "observation_hours": 631,
     "latest_obs_time": "2026-11-26 16:00:00",
     "latest_pm25": 15.0,
